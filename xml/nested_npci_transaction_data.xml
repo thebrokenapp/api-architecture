@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transaction>
+	<date>2024-06-28</date>
+	<time>16:06:73</time>
+	<amount>200</amount>
+	<remitter_name>abc@xyz</remitter_name>
+	<depositor_name>pqr@xyz</depositor_name>
+	<status>failed</status>
+	<user>
+		<upi_id>abc@okhdfc</upi_id>
+		<name>Ankit</name>
+		<device>iPhone 13</device>
+	</user>
+</transaction>
