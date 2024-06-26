@@ -1,8 +1,6 @@
-
-
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Standalone attribute tells the XML parsers if this XML exists on its own
 or can this XML use some external document like XML schema. Default is NO-->
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <transaction>
 	<date>2024-06-28</date>
 	<time>16:06:73</time>
