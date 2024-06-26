@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Standalone attribute tells the XML parsers if this XML exists on its own
+or can this XML use some external document like XML schema. Default is NO-->
+<transaction type="upi">
+	<date>2024-06-28</date>
+	<time>16:06:73</time>
+	<amount>200</amount>
+	<remitter_name bank="hdfc">abc@xyz</remitter_name>
+	<depositor_name bank="idfc">pqr@xyz</depositor_name>
+	<status>failed</status>
+	<app_used>Paytm</app_used>
+	<os_used>android</os_used>
+	<location ></location>
+</transaction>
