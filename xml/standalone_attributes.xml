@@ -1,0 +1,15 @@
+
+
+<!-- Standalone attribute tells the XML parsers if this XML exists on its own
+or can this XML use some external document like XML schema. Default is NO-->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<transaction>
+	<date>2024-06-28</date>
+	<time>16:06:73</time>
+	<amount>200</amount>
+	<remitter_name>abc@xyz</remitter_name>
+	<depositor_name>pqr@xyz</depositor_name>
+	<status>failed</status>
+	<app_used>Paytm</app_used>
+	<os_used>android</os_used>
+</transaction>
