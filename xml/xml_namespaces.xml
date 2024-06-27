@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions xmlns:upi="http://npci.com/upi" xmlns:uidai="http://uidai.com/adhaar">
+    <upi:transaction>
+        <date>2024-06-28</date>
+        <time>16:06:73</time>
+        <amount>200</amount>
+        <remitter_name>abc@xyz</remitter_name>
+        <depositor_name>pqr@xyz</depositor_name>
+        <status>failed</status>
+        <app_used>Paytm</app_used>
+        <os_used>android</os_used>
+    </upi:transaction>
+    <uidai:transaction>
+        <date>2024-06-28</date>
+        <time>16:06:73</time>
+        <adhaar_num>111122223333</adhaar_num>
+        <status>success</status>
+        <app_used>upi</app_used>
+        <os_used>android</os_used>
+    </uidai:transaction>
+</transactions>
