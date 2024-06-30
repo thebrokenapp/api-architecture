@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: My Frist OAS
+  version: v1.2
+servers:
+- url: https:/ /farmstall.designapis.com/v1
+paths: 
+  /reviews: 
+    get:
+      description: Get all reviews
+      parameters:
+      - name: maxRating
+        description: filter using a rating level
+        in: query
+        schema:
+         type: number
+      
+      responses:
+        200:
+          description: Response for valid request
