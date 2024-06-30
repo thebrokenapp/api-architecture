@@ -6,7 +6,7 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Create Order
 #### Request Type
 ```http
-  POST /orders
+POST /orders
 ```
 
 #### Request Body
