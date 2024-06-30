@@ -38,7 +38,7 @@ POST /orders
 ## Get all orders
 #### Request Type
 ```http
-  GET /orders
+GET /orders
 ```
 #### Response
 ```javascript
