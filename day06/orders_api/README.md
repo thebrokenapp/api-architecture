@@ -140,11 +140,49 @@ Details of API usage: including request body (payload), request type, headers, e
     ],
     "id": "8c907951-11a9-4139-9e03-78b1f022f54b",
     "created": "2024-06-30T05:54:13.206774",
-    "status": "progress"
+    "status": "cancelled"
 }
 ```
 
+## Delete an order
+#### Request Type 
+```http
+  DELETE /orders/{order_id}
+```
 
+
+## Update an order
+#### Request Type 
+```http
+  PUT /orders/{order_id}
+```
+#### Request
+```javascript
+{
+  "order": [
+    {
+      "product": "croissant",
+      "size": "small",
+      "quantity": 1
+    }
+  ]
+}
+```
+#### Response
+```javascript
+{
+    "order": [
+        {
+            "product": "croissant",
+            "size": "small",
+            "quantity": 1
+        }
+    ],
+    "id": "0ffda170-3c0c-4b98-9364-15c1d4f9f35b",
+    "created": "2024-06-30T06:56:14.415320",
+    "status": "created"
+}
+```
 
 
 
