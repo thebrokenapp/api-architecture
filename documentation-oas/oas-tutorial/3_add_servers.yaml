@@ -15,6 +15,12 @@ paths:
       summary: Returns a list of reviews
       description: >
         Get list of all reviews
+      parameters:
+      - name: maxRating
+        description: filter using a rating level
+        in: query
+        schema:
+         type: number
       responses:
         '200':
           description: A JSON array of reviews
