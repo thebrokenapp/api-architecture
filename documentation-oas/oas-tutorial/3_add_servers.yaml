@@ -1,0 +1,20 @@
+openapi: 3.0.3
+
+info:
+  title: Orders API
+  description: API that allows you to manage orders for CoffeeMesh
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:8000/
+    description: main production server
+
+paths:
+  /reviews:
+    get:
+      summary: Returns a list of reviews
+      description: >
+        Get list of all reviews
+      responses:
+        '200':
+          description: A JSON array of reviews
