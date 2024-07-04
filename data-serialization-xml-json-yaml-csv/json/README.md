@@ -1,9 +1,16 @@
 # Sample UPI JSON
 
 
-### Installation
+### Install Node JS
+```bash
+Download nodeJS and double click to install
+```
+### Install json-server
+```bash
+npm install -g json-server
+```
 
-
+### Sample Transaction Data
 ```bash
 {
     "transaction_id": "txn_1234567890",
