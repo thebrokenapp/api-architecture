@@ -44,6 +44,48 @@ npm install -g json-server
 
 ```
 
+### JSON Generator Template
+```bash
+{
+  "upi":[
+    "repeat(10)",
+    {
+      "transactionId": "guid()",
+      "timestamp": "date(2024-07-01, 2024-07-10)",
+      "amount": "int(10,100000)",
+      "currency": "enum(INR,USD,EUR)",
+      
+      "payer":{
+        "bank": "enum(hdfc,sbi,idfc,axis)",
+        "name": "firstName()",
+        "mobile": "phoneNumber()"
+      },
+      "payerUpiId": "this.payer.name-this.payer.bank",
+      "payee":{
+        "bank": "enum(hdfc,sbi,idfc,axis)",
+        "name": "firstName()",
+        "mobile": "phoneNumber()"
+      },
+      "payeeUpiId": "this.payee.name-this.payee.bank",
+      "status": "enum(initiated, processing, success, failed)",
+      "note": "product()",
+      "metadata":{
+        "latitude": "latitude()",
+        "longitude": "longitude()",
+        "ip": "ipv4()"
+      }
+
+    }
+  ]
+}
+
+```
+
+
+
+
+
+
 ### Start json-server
 ```bash
 json-server -p 5000 ./db.json
