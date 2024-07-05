@@ -13,34 +13,30 @@ npm install -g json-server
 ### Sample Transaction Data
 ```bash
 {
-    "transaction_id": "txn_1234567890",
-    "timestamp": "2024-07-04T10:15:30Z",
-    "status": "SUCCESS",
-    "amount": {
-        "currency": "INR",
-        "value": 500
-    },
-    "sender": {
-        "name": "Alice",
-        "upi_id": "alice@bank"
-    },
-    "recipient": {
-        "name": "Bob",
-        "upi_id": "bob@bank"
-    },
-    "remarks": "Payment for dinner",
-    "transaction_type": "P2P",
-    "reference_id": "ref_9876543210",
-    "bank_response_code": "00",
-    "bank_transaction_id": "bank_txn_112233",
-    "additional_info": {
-        "device_id": "device_abcdefg12345",
-        "geo_location": {
-            "latitude": 12.9715987,
-            "longitude": 77.594566
-        }
+      "transactionId": "9e8d1223-c25a-4845-a37d-1a24f1e96d86",
+      "timestamp": "2024-07-07T16:00:55.393Z",
+      "amount": 67218,
+      "currency": "EUR",
+      "payer": {
+        "bank": "idfc",
+        "name": "Esther",
+        "mobile": "(883) 652-4890 x791"
+      },
+      "payerUpiId": "Esther-idfc",
+      "payee": {
+        "bank": "hdfc",
+        "name": "Clotilde",
+        "mobile": "431.577.5699 x51412"
+      },
+      "payeeUpiId": "Clotilde-hdfc",
+      "status": "processing",
+      "note": "Shirt",
+      "metadata": {
+        "latitude": 41.9584,
+        "longitude": -168.9186,
+        "ip": "94.177.133.63"
+      }
     }
-}
 
 ```
 
