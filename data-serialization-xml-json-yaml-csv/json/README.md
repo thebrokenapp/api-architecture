@@ -43,3 +43,8 @@ npm install -g json-server
 }
 
 ```
+
+### Start json-server
+```bash
+json-server -p 5000 ./db.json
+```
