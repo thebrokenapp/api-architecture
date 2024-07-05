@@ -40,6 +40,12 @@ npm install -g json-server
 
 ```
 
+
+
+### JSON Generator Tool
+```bash
+https://www.jsongenerator.io/
+```
 ### JSON Generator Template
 ```bash
 {
