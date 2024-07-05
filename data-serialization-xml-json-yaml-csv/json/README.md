@@ -92,3 +92,172 @@ https://www.jsongenerator.io/
 ```bash
 json-server -p 5000 ./db.json
 ```
+
+
+
+# API Reference
+Details of API usage: including request body (payload), request type, headers, etc
+
+
+## Get All Transactions
+#### Request Type
+```http
+  GET /upi
+```
+
+#### Response
+```javascript
+[
+  {
+        "transactionId": "95e44551-8801-4e7b-8f84-51dc8f4fccc1",
+        "timestamp": "2024-07-02T10:42:36.340Z",
+        "amount": 94371,
+        "currency": "USD",
+        "payer": {
+            "bank": "axis",
+            "name": "Lisa",
+            "mobile": "(898) 511-6727"
+        },
+        "payerUpiId": "Lisa-axis",
+        "payee": {
+            "bank": "sbi",
+            "name": "Kurt",
+            "mobile": "475.211.8942 x1002"
+        },
+        "payeeUpiId": "Kurt-sbi",
+        "status": "processing",
+        "note": "Fish",
+        "metadata": {
+            "latitude": 75.4021,
+            "longitude": 18.3344,
+            "ip": "215.235.229.18"
+        },
+        "id": "1b90"
+    }
+]
+```
+
+## Get one transaction by JSON ID
+#### Request Type
+```http
+  GET /upi/{id}
+```
+#### Response
+```javascript
+[
+  {
+        "transactionId": "95e44551-8801-4e7b-8f84-51dc8f4fccc1",
+        "timestamp": "2024-07-02T10:42:36.340Z",
+        "amount": 94371,
+        "currency": "USD",
+        "payer": {
+            "bank": "axis",
+            "name": "Lisa",
+            "mobile": "(898) 511-6727"
+        },
+        "payerUpiId": "Lisa-axis",
+        "payee": {
+            "bank": "sbi",
+            "name": "Kurt",
+            "mobile": "475.211.8942 x1002"
+        },
+        "payeeUpiId": "Kurt-sbi",
+        "status": "processing",
+        "note": "Fish",
+        "metadata": {
+            "latitude": 75.4021,
+            "longitude": 18.3344,
+            "ip": "215.235.229.18"
+        },
+        "id": "1b90"
+    }
+]
+```
+
+
+## Get one transaction using URL parameter
+#### Request Type
+```http
+  GET /upi?{transactionId}
+```
+```http
+  GET /upi?{payerUpiId}
+```
+#### Response
+```javascript
+[
+    {
+        "transactionId": "95e44551-8801-4e7b-8f84-51dc8f4fccc1",
+        "timestamp": "2024-07-02T10:42:36.340Z",
+        "amount": 94371,
+        "currency": "USD",
+        "payer": {
+            "bank": "axis",
+            "name": "Lisa",
+            "mobile": "(898) 511-6727"
+        },
+        "payerUpiId": "Lisa-axis",
+        "payee": {
+            "bank": "sbi",
+            "name": "Kurt",
+            "mobile": "475.211.8942 x1002"
+        },
+        "payeeUpiId": "Kurt-sbi",
+        "status": "processing",
+        "note": "Fish",
+        "metadata": {
+            "latitude": 75.4021,
+            "longitude": 18.3344,
+            "ip": "215.235.229.18"
+        },
+        "id": "1b90"
+    }
+]
+```
+
+
+## Create UPI Transaction
+```http
+  POST /upi
+```
+#### Response
+```javascript
+{
+        "transactionId": "my_transaction_id",
+        "timestamp": "2024-07-02T10:42:36.340Z",
+        "amount": 130,
+        "currency": "INR",
+        "payer": {
+            "bank": "axis",
+            "name": "Ankit",
+            "mobile": "9940330141"
+        },
+        "payerUpiId": "ankit-axis",
+        "payee": {
+            "bank": "sbi",
+            "name": "Kurt",
+            "mobile": "475.211.8942 x1002"
+        },
+        "payeeUpiId": "Kurt-sbi",
+        "status": "processing",
+        "note": "Fish",
+        "metadata": {
+            "latitude": 75.4021,
+            "longitude": 18.3344,
+            "ip": "215.235.229.18"
+        },
+        "id": "1b90"
+    }
+```
+
+## Delete UPI Transaction
+```http
+  DELETE /upi/{jsonId}
+```
+
+
+## Update UPI Transaction
+```http
+  PUT /upi/{jsonId}
+```
+
