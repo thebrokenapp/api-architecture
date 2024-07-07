@@ -61,7 +61,7 @@ POST /payments
 ```javascript
   {
       "amount": 12000,
-      "payer_upi": "abx@okhdfc"
+      "payer_upi": "abx@okhdfc",
       "payee_upi": "qwe-sbi",
       "note": "Books"
   }
