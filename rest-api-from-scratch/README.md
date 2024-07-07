@@ -37,7 +37,7 @@ GET /payments
 ## Fetch one payment by transaction ID
 #### Request Type
 ```http
-  GET /payment/{payment_id}
+GET payments/{transaction_id}
 ```
 #### Response
 ```javascript
@@ -55,7 +55,7 @@ GET /payments
 
 ## Create UPI Transaction
 ```http
-  POST /payments
+POST /payments
 ```
 #### Request
 ```javascript
@@ -69,12 +69,12 @@ GET /payments
 
 ## Delete UPI Transaction
 ```http
-  DELETE /payments/{transaction_id}
+DELETE /payments/{transaction_id}
 ```
 
 
 ## Update UPI Transaction
 ```http
-  PUT /payments/{transaction_id}
+PUT /payments/{transaction_id}
 ```
 
