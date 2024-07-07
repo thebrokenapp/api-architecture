@@ -37,7 +37,7 @@ GET /payments
 ## Fetch one payment by transaction ID
 #### Request Type
 ```http
-GET /payments
+GET /payments/{transaction_id}
 ```
 #### Response
 ```javascript
