@@ -53,7 +53,7 @@ GET /payments/{transaction_id}
 ```
 
 
-## Create UPI Transaction
+## Initiate Payment Transaction
 ```http
 POST /payments
 ```
@@ -67,13 +67,13 @@ POST /payments
     }
 ```
 
-## Delete UPI Transaction
+## Delete Payment Transaction
 ```http
 DELETE /payments/{transaction_id}
 ```
 
 
-## Update UPI Transaction
+## Update Payment Transaction
 ```http
 PUT /payments/{transaction_id}
 ```
