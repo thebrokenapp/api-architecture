@@ -59,12 +59,12 @@ POST /payments
 ```
 #### Request
 ```javascript
-{
-        "amount": 12000,
-        "payer_upi": "abx@okhdfc
-        "payee_upi": "qwe-sbi",
-        "note": "Books",
-    }
+  {
+      "amount": 12000,
+      "payer_upi": "abx@okhdfc"
+      "payee_upi": "qwe-sbi",
+      "note": "Books"
+  }
 ```
 
 ## Delete Payment Transaction
