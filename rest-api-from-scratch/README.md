@@ -7,7 +7,7 @@ Before we begin, let's upderstand the API that we are building along with reques
 ## Fetch All Payments
 #### Request Type
 ```http
-  GET /payments
+GET /payments
 ```
 
 #### Response
