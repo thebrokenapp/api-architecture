@@ -1,5 +1,5 @@
 
-# REST API From Scratch
+# API Description
 Before we begin, let's upderstand the API that we are building along with request URLs, methods, request body, response body, etc
 
 
