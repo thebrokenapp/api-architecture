@@ -79,17 +79,7 @@ python app.py
 #### Make the API call using POSTMAN
 Make the API call to `/payments` endpoint in Postman to see if you are getting an empty response
 ```http
-POST /payments
-```
-
-#### Sample Request Body
-```http
-{
-    "amount": 12000,
-    "payer_upi": "abx@okhdfc",
-    "payee_upi": "qwe-sbi",
-    "note": "Books"
-}
+GET /payments/{transaction_id}
 ```
 
 
