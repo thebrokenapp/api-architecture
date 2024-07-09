@@ -33,7 +33,7 @@ python -m venv <complete path to your rest-api-env folder>
 
 #### Activate virtualenv
 ```bash
-Scripts\active
+Scripts\activate
 ```
 
 #### Install Flask
