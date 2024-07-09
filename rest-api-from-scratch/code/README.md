@@ -28,7 +28,7 @@ cd rest-api-env
 
 #### Create virtualenv
 ```bash
-python -m vevn <complete path to your rest-api-env folder>
+python -m venv <complete path to your rest-api-env folder>
 ```
 
 #### Activate virtualenv
