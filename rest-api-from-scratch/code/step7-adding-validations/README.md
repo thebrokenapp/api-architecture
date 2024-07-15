@@ -13,7 +13,7 @@ from pydantic import BaseModel, Field, UUID4
 from flask_pydantic import validate
 ```
 
-## Validating Single Transaction Fetch Request
+## Validating Single Transaction Fetch Request: GET /payments/{transaction_id}
 We can fetch details of one transaction using transaction ID. And the transaction id has to be in `UUID` format. So let's add the validation logic, which will reject any request that does not pass valid `UUID` in the request URL
 
 To put any path behind a validation layer, we add `@validate` just before the function definition:
