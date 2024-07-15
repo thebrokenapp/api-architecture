@@ -66,7 +66,7 @@ Try to make postman request with amount as both `int` and `string`.
 You will notice, that even though we have defined `amount` as `int`, our API still allows `string` value but stores it as an `int` (confirm with `GET` request)
 
 
-#### String Validation
+#### Strict Validation
 In strict validation we dont allow any request with any mismatch of datatypes and to enforce strict validation, change the `Payment` class as following
 
 ```python
