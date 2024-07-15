@@ -1,7 +1,7 @@
 ### Validating Update Payment
 
 ```http
-  PUT /payments/{transaction_id}
+PUT /payments/{transaction_id}
 ```
 #### Request Body
 | Parameter | Type     | Description                       |
