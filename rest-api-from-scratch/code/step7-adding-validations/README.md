@@ -47,7 +47,7 @@ def getPayment(transaction_id: UUID4):
 #### Initiate Payment
 
 ```http
-  POST /payments/{transaction_id}
+POST /payments/{transaction_id}
 ```
 
 | Parameter | Type     | Description                       |
