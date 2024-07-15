@@ -123,4 +123,5 @@ class Payment(BaseModel):
 ```
 
 #### Postman
-Try making request with correct and incorrect dataype
+* Try making request with correct and incorrect dataype
+* Try making request without some of the `required` field and confirm if it's getting rejected
