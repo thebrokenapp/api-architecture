@@ -1,4 +1,6 @@
-## Add one more endpoint for SignUp
+## Add one more endpoint for User SignUp
+
+#### Use the similar concept of using database in the code itself for maintaining user details
 
 #### Decide the request method
 #### Decide the Path
