@@ -40,3 +40,22 @@ def getPayment(transaction_id: UUID4):
 ```
 
 #### Try making request in Postman with incorrect format of transaction ID and observe if the error message indicates the invalid request
+---
+
+
+
+#### Initiate Payment
+
+```http
+  POST /payments/{transaction_id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `amount`         | `Integer` | **Required** |
+| `payer_upi`      | `string`  | **Required** |
+| `payee_upi`      | `string`  | **Required** |
+| `note`      	   | `string`  | **Optional** |
+
+
+
