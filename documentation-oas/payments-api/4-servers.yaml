@@ -5,4 +5,12 @@ info:
   description: This documentation describes 4 endpoints namely /payments, /apiStatus, /payments/{transaction_id}, /signUp
     You can use this documentation to send requests to the servers too. This is written using OAS.
   termsOfService: https://www.bhimupi.org.in/terms-conditions
+  contact:
+    name: Ankit Sahay
+    email: ankit@thebrokenapp.in
+servers:
+  - url: http://127.0.0.1:5000
+    description: Development Server
+  - url: http://192.4.8.1:5000
+    description: Production Server
 paths: {}
