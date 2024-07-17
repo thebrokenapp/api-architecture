@@ -9,7 +9,7 @@ info:
     name: Ankit Sahay
     email: ankit@thebrokenapp.in
 servers:
-  - url: 127.0.0.1:5000
+  - url: http://127.0.0.1:5000
     description: Development Server
 paths:
   /apiStatus:
@@ -17,8 +17,3 @@ paths:
       responses:
         '200':
           description: A message saying API is up or not
-          content:
-            application/json:
-              schema:
-                type: object
-  
