@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Payments API Documentation
+  version: 1.1.0
+  description: This documentation describes 4 endpoints namely /payments, /apiStatus, /payments/{transaction_id}, /signUp
+    You can use this documentation to send requests to the servers too. This is written using OAS.
+  termsOfService: https://www.bhimupi.org.in/terms-conditions
+  contact:
+    name: Ankit Sahay
+    email: ankit@thebrokenapp.in
+servers:
+  - url: http://127.0.0.1:5000
+    description: Development Server
+paths:
+  /apiStatus:
+    get:
+      responses:
+        '200':
+          description: A message saying API is up or not
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type:
+                      string
+  /payments:
+    post:
+      responses:
+        '200':
+          description: Make a payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  minimum: 0
+                  maximum: 100000
+                payer_upi:
+                  type: string
+                payee_upi:
+                  type: string
+                note:
+                  type: string
