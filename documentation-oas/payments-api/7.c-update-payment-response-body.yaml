@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: Payments API Documentation
+  version: 1.1.0
+  description: This documentation describes 4 endpoints namely /payments, /apiStatus, /payments/{transaction_id}, /signUp
+    You can use this documentation to send requests to the servers too. This is written using OAS.
+  termsOfService: https://www.bhimupi.org.in/terms-conditions
+  contact:
+    name: Ankit Sahay
+    email: ankit@thebrokenapp.in
+servers:
+  - url: http://127.0.0.1:5000
+    description: Development Server
+paths:
+  /apiStatus:
+    get:
+      responses:
+        '200':
+          description: A message saying API is up or not
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type:
+                      string
+  /payments:
+    post:
+      responses:
+        '201':
+          description: Payment initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                  payer_upi:
+                    type: string
+                  payee_upi:
+                    type: string
+                  note:
+                    type: string
+                  status:
+                    type: string
+                  timestamp:
+                    type: string
+                  transaction_id:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  minimum: 0
+                  maximum: 100000
+                payer_upi:
+                  type: string
+                payee_upi:
+                  type: string
+                note:
+                  type: string
+                  
+  /payments/{transaction_id}:
+    put:
+      description: Updating a transaction by transaction ID
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  minimum: 0
+                  maximum: 100000
+                payer_upi:
+                  type: string
+                payee_upi:
+                  type: string
+                note:
+                  type: string
+          
+      responses:
+        '200':
+          description: Payment initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                  payer_upi:
+                    type: string
+                  payee_upi:
+                    type: string
+                  note:
+                    type: string
+                  status:
+                    type: string
+                  timestamp:
+                    type: string
+                  transaction_id:
+                    type: string
+        
+      
+      
