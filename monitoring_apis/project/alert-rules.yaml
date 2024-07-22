@@ -1,0 +1,20 @@
+# this goes in the location where prometheus.yml exists in the prometheus directory
+groups:
+- name: Payment API Rules
+  rules:
+  - alert: APIDown
+    expr: up{instance="127.0.0.1:5000", job="api-monitoring"} == 0
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: API is down (instance {{ $labels.instance }})
+      description: "API instance is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+  - alert: Error Rate High
+    expr: rate(flask_http_request_duration_seconds_count{status!="200"}[30s]) > 2
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: Too many errors(instance {{ $labels.instance }})
+      description: "API error rate is high\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
