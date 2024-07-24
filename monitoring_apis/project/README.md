@@ -75,3 +75,37 @@ username: admin
 password: admin
 ```
 
+### AlertManager
+Download the alertmanager from
+```url
+https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.windows-amd64.zip
+```
+
+Extract the content on the zip file in your `monitoring-api` folder
+
+Enable email authorization in your personal gmail, go to:
+```url
+https://myaccount.google.com/apppasswords
+```
+Enter `name` and remember this name
+You will be give a 16 digit code - copy it somewhere - if you close the window you will loose it forever
+
+
+Inside the folder, replace your existing `alertmanager.yaml` with the one present here:
+```url
+https://github.com/thebrokenapp/api-architecture/blob/main/monitoring_apis/project/alertmanager.yaml
+```
+In this file change the `email addresses`, `auth-identity` and `auth-password`
+
+
+Also, stop your `prometheus` and download the file
+```url
+https://github.com/thebrokenapp/api-architecture/blob/main/monitoring_apis/project/alert-rules.yaml
+```
+Place this `alert-rules.yaml` file in prometheus folder and restart prometheus
+
+Start alert manager
+```
+.\alertmanager.exe
+```
+
