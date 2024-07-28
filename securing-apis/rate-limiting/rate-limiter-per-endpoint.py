@@ -7,32 +7,32 @@ app = Flask(__name__)
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["200 per day", "50 per hour"],
+    default_limits=["200 per day", "5 per hour"],
     storage_uri="memory://",
 )
 
+# rate of 8 per day and default limit is not applied
+@app.route("/apiStatus")
+@limiter.limit("8 per day")
+def apiStatus():
+    return "API is up"
 
-@app.route("/slow")
-@limiter.limit("1 per day")
-def slow():
-    return ":("
-
-
-@app.route("/medium")
+# Rate of 1 request per second and default limit is also applied
+@app.route("/makePayment")
 @limiter.limit("1/second", override_defaults=False)
-def medium():
-    return ":|"
+def makePayment():
+    return "Payment Done"
 
-
-@app.route("/fast")
+# default limit is applied
+@app.route("/fetchPayment")
 def fast():
-    return ":)"
+    return "Payment Fetched"
 
-
-@app.route("/ping")
+# no limit is applied
+@app.route("/checkBalance")
 @limiter.exempt
 def ping():
-    return "PONG"
+    return "Balance is Rs.100"
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port= 5000, debug=True)
