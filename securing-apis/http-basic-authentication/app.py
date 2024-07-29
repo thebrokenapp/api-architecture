@@ -15,15 +15,15 @@ def verify_password(username, password):
     if username in users and check_password_hash(users.get(username), password):
         return username
 
-@app.route('/apiStatus')
+@app.route('/checkBalance')
 @auth.login_required
-def index():
+def check_balance():
     print(request.headers)
-    return {"message": "API is up!"}
+    return {"message": "Your balance is Rs 500"}
     #return "Hello, {}! API is up!".format(auth.current_user())
 
-@app.route('/noAuth')
-def noAuth():
+@app.route('/apiStatus')
+def apiStatus():
     return {"message": "API is up!"}
 
 
