@@ -20,7 +20,7 @@ def get_token():
     if username in users_db and users_db[username] == password:
         token = jwt.encode({
             'username': username,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=2)
         }, app.config['SECRET_KEY'], algorithm='HS256')
         return jsonify({'token': token})
 
