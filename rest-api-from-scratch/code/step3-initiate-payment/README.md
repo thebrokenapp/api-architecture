@@ -80,7 +80,7 @@ def initiatePayment():
 	data["timestamp"] = timestamp 			# Attach timestamp in the request body
 	payments.append(data)					# Add the request body in our "payments" database
  
-	return dataclasses						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
+	return data						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
 
 
 if __name__ == "__main__":
