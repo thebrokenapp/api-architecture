@@ -1,5 +1,6 @@
 
-# Implementing Fetch All Payments Endpoints
+# Implementing Creating One Payment Endpoint 
+### POST /payments
 
 
 # Code
