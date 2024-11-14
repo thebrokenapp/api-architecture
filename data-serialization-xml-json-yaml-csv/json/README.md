@@ -186,10 +186,10 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Get one transaction using URL parameter
 #### Request Type
 ```http
-  GET /upi?{transactionId}
+  GET /upi?transactionId={transactionId}
 ```
 ```http
-  GET /upi?{payerUpiId}
+  GET /upi?payerUpiId={payerUpiId}
 ```
 #### Response
 ```javascript
