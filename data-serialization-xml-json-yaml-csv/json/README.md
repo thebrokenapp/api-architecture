@@ -148,7 +148,7 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Get one transaction by JSON ID
 #### Request Type
 ```http
-  GET /upi/{id}
+      GET /upi/{id}
 ```
 #### Response
 ```javascript
