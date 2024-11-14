@@ -1,10 +1,18 @@
 # UPI JSON Data - Hands On
 
 
-### Install Node JS
+### Install Node JS - Windows
 ```bash
-Download nodeJS and double click to install
+Download nodeJS and double click to install (Windows)
 ```
+### Install Node JS - Ubuntu
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install node
+nvm use node
+node -v
+```
+
 ### Install json-server
 ```bash
 npm install -g json-server
