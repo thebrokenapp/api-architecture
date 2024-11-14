@@ -110,7 +110,7 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Get All Transactions
 #### Request Type
 ```http
-  GET /upi
+GET /upi
 ```
 
 #### Response
@@ -148,7 +148,8 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Get one transaction by JSON ID
 #### Request Type
 ```http
-      GET /upi/{id}
+GET /upi/{id}
+Note id is auto generated (check from them in above response)
 ```
 #### Response
 ```javascript
