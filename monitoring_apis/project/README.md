@@ -40,7 +40,8 @@ https://raw.githubusercontent.com/thebrokenapp/api-architecture/main/monitoring_
 
 Start prometheus from command line:
 ```bash
-.\prometheus.exe
+.\prometheus.exe (Windows)
+./prometheus --web.listen-address=127.0.0.1:9090 (Linux)
 ```
 
 To check if prometheus is started correctly, go to:
