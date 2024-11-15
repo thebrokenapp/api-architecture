@@ -61,9 +61,15 @@ Click on download `standalone binaries`
 
 Once downloaded, place the zip file in your `monitoring-api` folder and extract it.
 
+#### For linux
+Edit your config/defaults.ini file
+In the `server` section change the value of `http_addr` to represent as below
+`http_addr =127.0.0.1`
+
 Launch grafana using cmd:
 ```bash
-.\bin\grafana-server.exe
+.\bin\grafana-server.exe (Windows)
+bin/grafana server (Linux)
 ```
 
 To see if `grafana` is running properly, go to:
