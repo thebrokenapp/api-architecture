@@ -113,6 +113,7 @@ Place this `alert-rules.yaml` file in prometheus folder and restart prometheus
 
 Start alert manager
 ```
-.\alertmanager.exe
+.\alertmanager.exe (Windows)
+./alertmanager --web.listen-address=127.0.0.1:9093 (Linux)
 ```
 
