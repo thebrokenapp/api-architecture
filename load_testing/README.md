@@ -5,7 +5,7 @@
 pip install locust
 ```
 
-#### Step 2: Download the locustfile.py in your directory
+#### Step 2: Download the `locustfile.py` in your directory
 #### Step 3: Keep your Payment API running on 127.0.0.1:5000
 #### Step 4: Launch your locust testing file
 ```bash
