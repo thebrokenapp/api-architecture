@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from datetime import datetime
 import uuid
 from pydantic import BaseModel, Field, UUID4
@@ -31,13 +31,13 @@ def status():
 
 
 
-my_db = []
+payments = []
 my_users = []
 
 
 @app.route('/payments', methods=["GET"])
 def getPayments():
-	return {"data": my_db}
+	return {"data": payments}
 
 
 
@@ -50,7 +50,7 @@ def initiatePayment(body: Payment):
 	data["status"] = "initiated"			# by default all transactions starts with status as "initiated"
 	data["transaction_id"] = txn_id	# Attach transaction ID in the requestbody
 	data["timestamp"] = current_timestamp 			# Attach timestamp in the request body
-	my_db.append(data)					# Add the request body in our "payments" database
+	payments.append(data)					# Add the request body in our "payments" database
  
 	return data						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
 
@@ -59,7 +59,7 @@ def initiatePayment(body: Payment):
 @app.route('/payments/<transaction_id>')
 @validate()
 def getPayment(transaction_id: UUID4):
-	for payment in my_db:
+	for payment in payments:
 		if payment["transaction_id"] == str(transaction_id):
 			return payment
 
@@ -69,7 +69,7 @@ def getPayment(transaction_id: UUID4):
 
 @app.route('/payments/note/<note>')
 def getPaymentByNote(note):
-	for payment in my_db:
+	for payment in payments:
 		if payment["note"] == note:
 			return payment
 
@@ -79,7 +79,7 @@ def getPaymentByNote(note):
 @app.route('/payments/<transaction_id>', methods = ["PUT"])
 def updatePayment(transaction_id):
 	data = request.get_json()							# extract the request body and store it in variable "data"
-	for payment in my_db:							# loop over the list 
+	for payment in payments:							# loop over the list 
 		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
 			payment.update(data)						# update the previous JSON with new JSON
 			return payment                              # then return the item
@@ -94,7 +94,7 @@ def deletePayment(transaction_id):
 			payments.pop(index)							# update the previous JSON with new JSON
 			return Response({"message": "Resource deleted!"},  status=204)                 # then return the item
 
-	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404
+	return jsonify({"message": "Transaction not found"}),200   # otherwise return 404
 
 
 
