@@ -32,4 +32,6 @@ curl -H "Content-Type: application/json" http://127.0.0.1:5000/apiStatus
 curl -H "Content-Type: application/json" http://127.0.0.1:5000/payments/beatae
 
 curl -X GET -H "Content-Type: application/json" -H "Prefer: example=txn_2" http://127.0.0.1:5000/payments/txn_2
+
+ curl -X POST -H "Content-Type: application/json"  http://127.0.0.1:5000/payments  -d '{"amount": 100, "payer_upi":"abc", "payee_upi": "vbg"}'
 ```
