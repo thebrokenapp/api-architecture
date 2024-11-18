@@ -270,3 +270,19 @@ Note id is auto generated (check from them in above response)
   PUT /upi/{jsonId}
 ```
 
+
+## Additional Steps for NodJS Installation
+
+```bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+Close and Re-open Terminal
+nvm install node
+npm install -g json-server
+```
+
+#### Update v10 with newer version
+```bash
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+```
