@@ -13,7 +13,7 @@
   pip install prometheus-flask-exporter
 ```
 #### Make Following changes to your Payments API
-```bash
+```python
 from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
