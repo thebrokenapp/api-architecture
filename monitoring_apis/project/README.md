@@ -14,6 +14,11 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 PrometheusMetrics(app)
 ```
+Check if your API is exporting metrics
+```bash
+Go to http://127.0.0.1:5000/metrics
+```
+
 
 #### Start the Mock Events app:
 ```bash
