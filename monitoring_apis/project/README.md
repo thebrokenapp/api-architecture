@@ -12,15 +12,39 @@
   pip install flask
   pip install prometheus-flask-exporter
 ```
-#### Start the API
+#### Make Following changes to your Payments API
 ```bash
-  python app.py
+from prometheus_flask_exporter import PrometheusMetrics
+
+app = Flask(__name__)
+PrometheusMetrics(app)
 ```
 
 #### Start the Mock Events app:
 ```bash
 python generate_events.py
+OR
+Start locustfile to generate load
 ```
+
+
+#### Node Exporter
+Download node-exporter
+``` bash
+wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+tar -xvf node_exporter-1.8.2.linux-amd64.tar.gz
+```
+
+Extract node-exporter
+``` bash
+tar -xvf node_exporter-1.8.2.linux-amd64.tar.gz
+```
+
+Launch node-exporter
+```bash
+./node_exporter --web.listen-address=127.0.0.1:9100
+```
+
 
 ### Prometheus
 Download `prometheus` from the following link:
