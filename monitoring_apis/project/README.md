@@ -1,17 +1,12 @@
 
 ## Monitoring APIs
 
-#### 1. Create a folder `monitoring-api`
-
-#### 2. Download sample API code and name the file `app.py`
-
-#### 3. Download sample python code to generate mock traffic `generate_events.py`
-
-#### 4. Activate the previous virtual-env and after that install:
+#### Python Package Installation
 ```bash
   pip install flask
   pip install prometheus-flask-exporter
 ```
+
 #### Make Following changes to your Payments API
 ```python
 from prometheus_flask_exporter import PrometheusMetrics
@@ -43,6 +38,10 @@ tar -xvf node_exporter-1.8.2.linux-amd64.tar.gz
 Launch node-exporter
 ```bash
 ./node_exporter --web.listen-address=127.0.0.1:9100
+```
+Check if node-exporter is exporting the System metrics
+```bash
+Go to http://127.0.0.1:9100/metrics
 ```
 
 
