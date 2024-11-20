@@ -4,5 +4,9 @@ Request Per Second:
 Avg Response Time:
     rate(flask_http_request_duration_seconds_sum{status="200", path=~"/apiStatus|/payments"}[30s])/rate(flask_http_request_duration_seconds_count{status="200", path=~"/apiStatus|/payments"}[30s])
 
+Status Code Distribution (Pie Charts)
+sum(rate(flask_http_request_total[1m])) by (status)
+
+
 Responses under 250ms
   increase(flask_http_request_duration_seconds_bucket{status="200",le="0.25"}[30s]) / ignoring (le) increase(flask_http_request_duration_seconds_count{status="200"}[30s])
