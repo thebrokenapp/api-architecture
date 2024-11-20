@@ -12,7 +12,7 @@ users = {
 
 @auth.verify_password
 def verify_password(username, password):
-    if username in users and users.get(username) == password):
+    if username in users and users.get(username) == password:
         return username
 
 @app.route('/checkBalance')
