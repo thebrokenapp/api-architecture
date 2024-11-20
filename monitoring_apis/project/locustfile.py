@@ -32,7 +32,7 @@ class LoadTestUser(HttpUser):
                 print(f"Created transaction: {transaction_id}")
         else:
             print(f"Failed to create payment: {response.status_code}, {response.text}")
-
+    '''
     @task(1)  # Weight for deleting payments
     def delete_payment(self):
         if self.transaction_ids:
@@ -51,7 +51,7 @@ class LoadTestUser(HttpUser):
                 print(f"Unexpected response: {response.status_code}")
         else:
             print("No transactions available to delete.")
-
+    
     @task(1)  # Weight for deleting payments
     def get_single_payment(self):
         if self.transaction_ids:
@@ -67,7 +67,7 @@ class LoadTestUser(HttpUser):
                 print(f"Unexpected response: {response.status_code}")
         else:
             print("No transactions available to fetch")
-
+    '''
     @task(2)  # Runs this task twice as often as get_payments
     def create_profile(self):
         response = self.client.post("/signUp", json={
@@ -80,5 +80,23 @@ class LoadTestUser(HttpUser):
             print(f"Created user: ")
         else:
             print(f"Failed to create user: {response.status_code}, {response.text}")
+
+    @task(1)  # Runs this task twice as often as get_payments
+    def wrong_request(self):
+        response = self.client.post("/xyz", json={
+            "username": "ankit",
+            "passowrd": "Books"
+        })
+
+        if response.status_code == 200:  # Assuming 201 is the success status
+            
+            print(f"Created user: ")
+        else:
+            print(f"Failed to create user: {response.status_code}, {response.text}")
+
+    @task(3)  # Runs this task twice as often as get_payments
+    def random_request(self):
+        response = self.client.get("/random")
+        print("Random request made")
 
 # locust -f locustfile.py --host=http://127.0.0.1:5000 --web-host=127.0.0.1 --web-port=8080
