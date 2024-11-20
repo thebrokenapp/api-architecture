@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field, UUID4
 from flask_pydantic import validate
 import random
 from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class Payment(BaseModel):
@@ -30,15 +31,13 @@ auth = HTTPBasicAuth()
 #PrometheusMetrics(app)
 
 
-users = {
-    "ankit": "my_password",
-    "kumar": "12345"
+users_database = {
 }
 
 
 @auth.verify_password
 def verify_password(username, password):
-    if username in users and users.get(username)== password:
+    if username in users_database and check_password_hash(users_database.get(username), password):
         return username
 
 @app.route('/apiStatus')
@@ -123,10 +122,16 @@ def deletePayment(transaction_id):
 
 @app.route('/signUp', methods=["POST"])
 def signUp():
-	data = request.get_json()				# extract the request body and store it in variable "data"
-	my_users.append(data)					# Add the request body in our "payments" database
+	data = request.get_json()				
+	request_user_name= data["user_name"]
+	request_password = data["password"]
+	hashed_password = generate_password_hash(request_password)
+	
+	users_database[request_user_name] = hashed_password
+	
+	print(users_database)				
  
-	return data						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
+	return {"message":"User created"}						
 
 @app.route('/random', methods=["GET"])
 def random_path():
