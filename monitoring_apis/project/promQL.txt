@@ -3,3 +3,7 @@ Request Per Second:
 
 Avg Response Time:
     rate(flask_http_request_duration_seconds_sum{status="200"}[30s])/rate(flask_http_request_duration_seconds_count{status="200"}[30s])
+
+
+Responses under 250ms
+  increase(flask_http_request_duration_seconds_bucket{status="200",le="0.25"}[30s]) / ignoring (le) increase(flask_http_request_duration_seconds_count{status="200"}[30s])
