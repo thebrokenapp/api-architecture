@@ -4,7 +4,7 @@ from datetime import datetime
 import uuid
 from pydantic import BaseModel, Field, UUID4
 from flask_pydantic import validate
-
+import random
 
 
 class Payment(BaseModel):
@@ -108,6 +108,18 @@ def signUp():
  
 	return data						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
 
+@app.route('/random', methods=["GET"])
+def random_path():
+	number = random.randint(1, 10)
+	if number < 3:
+		return jsonify({"message": "Sending 201"}),201
+	if number == 4:
+		return jsonify({"message": "Sending 201"}),403
+	if number >= 5:
+		return jsonify({"message": "Sending 201"}),500
+	else:
+		return jsonify({"message": "Sending 201"}),204	
+
 
 if __name__ == "__main__":
-	app.run(host="127.0.0.1", port= 5000)
+	app.run(host="0.0.0.0", port= 5000)
