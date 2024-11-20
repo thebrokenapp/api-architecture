@@ -68,4 +68,17 @@ class LoadTestUser(HttpUser):
         else:
             print("No transactions available to fetch")
 
+    @task(2)  # Runs this task twice as often as get_payments
+    def create_profile(self):
+        response = self.client.post("/signUp", json={
+            "username": "ankit",
+            "passowrd": "Books"
+        })
+
+        if response.status_code == 200:  # Assuming 201 is the success status
+            
+            print(f"Created user: ")
+        else:
+            print(f"Failed to create user: {response.status_code}, {response.text}")
+
 # locust -f locustfile.py --host=http://127.0.0.1:5000 --web-host=127.0.0.1 --web-port=8080
