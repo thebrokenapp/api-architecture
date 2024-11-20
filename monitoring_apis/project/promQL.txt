@@ -1,0 +1,5 @@
+Request Per Second:
+  rate(flask_http_request_duration_seconds_count{status="200"}[30s])
+
+Avg Response Time:
+    rate(flask_http_request_duration_seconds_sum{status="200"}[30s])/rate(flask_http_request_duration_seconds_count{status="200"}[30s])
