@@ -1,3 +1,11 @@
+Numerical Panel
+  flask_http_request_total{job="api-monitoring", method="POST", status="404"}
+  flask_http_request_total{job="api-monitoring", method="POST", status="500"}
+  flask_http_request_total{job="api-monitoring", method="POST", status="403"}
+
+
+
+
 Request Per Second:
   rate(flask_http_request_duration_seconds_count{status="200"}[30s])
 
