@@ -7,7 +7,7 @@ sudo apt install openssl
 ```
 
 #### Setup your Own CA
- Create a directory structure for your CA 
+##### Create a directory structure for your CA 
 ```
 mkdir -p ~/myCA/newcerts                 -> keep all the certs that are issues by CA
 mkdir ~/myCA/private                     -> private cert of CA
