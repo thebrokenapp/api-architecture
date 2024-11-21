@@ -18,8 +18,9 @@ touch ~/myCA/myCAindex                   -> needed for some internal file and ce
 ################# Generate the Root Private Key ##################################
 openssl genpkey -algorithm RSA -out ~/myCA/private/myCA.key -aes256
 chmod 400 ~/myCA/private/myCA.key
-This will create a private key for your CA (myCA.key) with encryption. You'll need to set a password for this key
-
+This will create a private key for your CA (myCA.key) with encryption.
+You'll need to set a password for this key
+Remember this password - as it will be needed everytime to sign any certificate
 ################## Create the Root Certificate #################################
 openssl req -key ~/myCA/private/myCA.key -new -x509 -out ~/myCA/certs/myCA.crt
 This will prompt you for information like country, state, organization, and common name. For common name, use something like My Local CA.
