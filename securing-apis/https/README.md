@@ -7,8 +7,8 @@ sudo apt install openssl
 ```
 
 #### Setup your Own CA
+ Create a directory structure for your CA 
 ```
-################# Create a directory structure for your CA ##################################
 mkdir -p ~/myCA/newcerts                 -> keep all the certs that are issues by CA
 mkdir ~/myCA/private                     -> private cert of CA
 mkdir ~/myCA/certs                       -> public cert of CA
@@ -25,6 +25,23 @@ Remember this password - as it will be needed everytime to sign any certificate
 openssl req -key ~/myCA/private/myCA.key -new -x509 -out ~/myCA/certs/myCA.crt
 This will prompt you for information like country, state, organization, and common name. For common name, use something like My Local CA.
 ```
+
+##### Generate the Root Private Key
+This will create a private key for your CA (myCA.key) with encryption.
+You'll need to set a password for this key
+Remember this password - as it will be needed everytime to sign any certificate
+```bash
+openssl genpkey -algorithm RSA -out ~/myCA/private/myCA.key -aes256
+chmod 400 ~/myCA/private/myCA.key
+```
+
+##### Create the Root Certificate
+This will prompt you for information like country, state, organization, and common name. For common name, use something like My Local CA.
+```bash
+openssl req -key ~/myCA/private/myCA.key -new -x509 -out ~/myCA/certs/myCA.crt
+```
+
+
 
 #### Generate API Server Certificates
 Generate a Private Key for the Server:
