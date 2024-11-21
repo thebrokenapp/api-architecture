@@ -31,8 +31,7 @@ auth = HTTPBasicAuth()
 #PrometheusMetrics(app)
 
 
-users_database = {
-}
+users_database = {}
 
 
 @auth.verify_password
