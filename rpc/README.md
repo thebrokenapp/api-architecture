@@ -74,7 +74,7 @@ python whatsapp_rpc.py
 
 ### Test using Postman
 ```http
-  POST /apiStatus
+POST http://127.0.0.1:8000
 ```
 
 | Parameter | Type     | Description                |
