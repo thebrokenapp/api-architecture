@@ -85,6 +85,10 @@ POST http://127.0.0.1:8000
 
 
 ## Function 2: `send_message`
+### Add one addition import statement
+```python
+from datetime import datetime
+```
 ### Add second function `send_message()`
 ```python
 def send_message(message_from, message_to, message):
@@ -143,6 +147,46 @@ POST http://127.0.0.1:8000
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `method`  | `string` | **Required**. (apiStatus)   |
-| `params`  | `list`   | [message_from, message_to, message]                          |
+| `params`  | `list`   | [message_from, message_to, message]  |
+| `id    `  | `string` or `int` | **Required**      |
+
+
+
+## Function 3: `create_group`
+### Create a mock database as python dictionary
+```python
+groups = {}
+```
+
+### Add 3rd function `create_group()`
+```python
+def create_group(group_name, members):
+    groups[group_name] = members
+    status = "success"
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    return {"txn_status": status, "txn_timestamp": timestamp, "notes": "group is created with name: " + group_name}
+```
+
+
+### Register the function that you want to expose as API
+```python
+server.register_function(create_group)
+```
+
+### Launch your API
+```bash
+python whatsapp_rpc.py
+```
+
+### Test using Postman
+```http
+POST http://127.0.0.1:8000
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `method`  | `string` | **Required**. (apiStatus)   |
+| `params`  | `list`   | [group_name, members]  |
 | `id    `  | `string` or `int` | **Required**      |
 
