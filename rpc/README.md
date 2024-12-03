@@ -82,3 +82,20 @@ POST http://127.0.0.1:8000
 | `method`  | `string` | **Required**. (apiStatus)   |
 | `params`  | `list`   | []                          |
 | `id    `  | `string` or `int` | **Required**      |
+
+
+## Function 2: `send_message`
+### Add second function `send_message()`
+```python
+def send_message(message_from, message_to, message):
+    # do some logic
+    status = "success"
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    return {"txn_status": status, "send_time": timestamp, "notes": "message has been sent to " + message_to}
+```
+
+### Note 
+```bash
+First difference you should note that this function accepts three parameters: `message_from`, `message_to` and `message`
+```
