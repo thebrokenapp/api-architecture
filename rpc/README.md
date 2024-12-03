@@ -71,3 +71,14 @@ server.serve_forever()
 ```bash
 python whatsapp_rpc.py
 ```
+
+### Test using Postman
+```http
+  POST /apiStatus
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `method`  | `string` | **Required**. (apiStatus)   |
+| `params`  | `list`   | []                          |
+| `id    `  | `string` or `int` | **Required**      |
