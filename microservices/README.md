@@ -39,20 +39,30 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
 ### Configure NGINX for Your Application:
    1. Create a new server block:
       ```bash
-      sudo nano /etc/nginx/sites-available/myapp
+      sudo nano /etc/nginx/sites-available/payments
       ```
    3. Add the following configuration:
+      ```json
       server {
-          listen 80;
-          server_name your_domain.com www.your_domain.com;
+    listen 80;
+    server_name 127.0.0.1;  # Replace with your actual domain or IP
 
-          location / {
-              proxy_pass http://127.0.0.1:5000; # Flask app
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          }
-      }
+    # Routes handled by Flask on port 8000
+    
+
+    location  /payments  {
+        proxy_pass http://127.0.0.1:8000;
+    }
+
+    location  /user  {
+        proxy_pass http://127.0.0.1:8001;
+    }
+
+
+
+}
+
+      ```
    4. Enable the configuration:
       ```bash
       sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
