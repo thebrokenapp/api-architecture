@@ -1,4 +1,11 @@
-# Setting Up NGINX on Ubuntu
+# Microservices with API Gateway
+## Steps involved
+#### Start payments api on port 8000
+#### Start users api on port 8001
+#### Install Nginx
+#### Configure routing
+#### Launch Nginx
+#### Try in Postman
 
 This guide provides steps to install and configure NGINX on an Ubuntu system to serve your applications.
 
