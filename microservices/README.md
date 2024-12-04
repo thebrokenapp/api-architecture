@@ -59,3 +59,13 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
       sudo systemctl restart nginx
       ```
 
+#### Uninstalling nginx
+```bash
+sudo systemctl stop nginx
+sudo systemctl disable nginx
+sudo apt remove --purge nginx nginx-common -y
+sudo apt autoremove --purge -y
+sudo rm -rf /etc/nginx
+sudo rm -rf /var/log/nginx
+nginx -v
+```
