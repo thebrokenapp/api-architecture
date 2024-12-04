@@ -55,7 +55,6 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
             proxy_pass http://127.0.0.1:8001;
          }
       }
-
       ```
    4. Enable the configuration:
       ```bash
