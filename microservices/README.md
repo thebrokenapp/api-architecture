@@ -1,11 +1,11 @@
 # Microservices with API Gateway
 ## Steps involved
-#### Start payments api on port 8000
-#### Start users api on port 8001
-#### Install Nginx
-#### Configure routing
-#### Launch Nginx
-#### Try in Postman
+#### 1. Start payments api on port 8000
+#### 2. Start users api on port 8001
+#### 3. Install Nginx
+#### 4. Configure routing
+#### 5. Launch Nginx
+#### 6. Try in Postman
 
 This guide provides steps to install and configure NGINX on an Ubuntu system to serve your applications.
 
