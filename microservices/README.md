@@ -58,7 +58,7 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
       ```
    4. Enable the configuration:
       ```bash
-      sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
+      sudo ln -s /etc/nginx/sites-available/payments /etc/nginx/sites-enabled/
       ```
    5. Test the configuration:
       ```bash
