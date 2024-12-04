@@ -5,25 +5,32 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
 ## Steps
 
 1. **Install NGINX**:
+   ```bash
    sudo apt update
    sudo apt install nginx -y
-
-2. **Start and Enable NGINX**:
+   ```
+3. **Start and Enable NGINX**:
+   ```bash
    sudo systemctl start nginx
    sudo systemctl enable nginx
+   ```
 
-3. **Check NGINX Status**:
+5. **Check NGINX Status**:
+   ```bash
    sudo systemctl status nginx
-
-4. **Adjust Firewall (if applicable)**:
+   ```
+7. **Adjust Firewall (if applicable)**:
+   ```bash
    sudo ufw allow 'Nginx Full'
    sudo ufw enable
    sudo ufw status
+   ```
 
-5. **Access NGINX Default Page**:
+   
+9. **Access NGINX Default Page**:
    Open a web browser and navigate to your server’s IP address or `http://localhost`.
 
-6. **Configure NGINX for Your Application**:
+11. **Configure NGINX for Your Application**:
    1. Create a new server block:
       sudo nano /etc/nginx/sites-available/myapp
    2. Add the following configuration:
@@ -39,14 +46,15 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
           }
       }
    3. Enable the configuration:
+      ```bash
       sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
-   4. Test the configuration:
+      ```
+   5. Test the configuration:
+      ```bash
       sudo nginx -t
-   5. Restart NGINX:
+      ```
+   7. Restart NGINX:
+      ```bash
       sudo systemctl restart nginx
+      ```
 
-7. **Optional: Secure NGINX with SSL**:
-   sudo apt install certbot python3-certbot-nginx -y
-   sudo certbot --nginx -d your_domain.com -d www.your_domain.com
-
-This will automatically configure HTTPS for your server.
