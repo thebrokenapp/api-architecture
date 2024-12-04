@@ -3,23 +3,22 @@
 This guide provides steps to install and configure NGINX on an Ubuntu system to serve your applications.
 
 ## Steps
-
-1. **Install NGINX**:
+**Install NGINX**:
    ```bash
    sudo apt update
    sudo apt install nginx -y
    ```
-3. **Start and Enable NGINX**:
+**Start and Enable NGINX**:
    ```bash
    sudo systemctl start nginx
    sudo systemctl enable nginx
    ```
 
-5. **Check NGINX Status**:
+**Check NGINX Status**:
    ```bash
    sudo systemctl status nginx
    ```
-7. **Adjust Firewall (if applicable)**:
+**Adjust Firewall (if applicable)**:
    ```bash
    sudo ufw allow 'Nginx Full'
    sudo ufw enable
@@ -27,13 +26,15 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
    ```
 
    
-9. **Access NGINX Default Page**:
+**Access NGINX Default Page**:
    Open a web browser and navigate to your server’s IP address or `http://localhost`.
 
-11. **Configure NGINX for Your Application**:
+**Configure NGINX for Your Application**:
    1. Create a new server block:
+      ```bash
       sudo nano /etc/nginx/sites-available/myapp
-   2. Add the following configuration:
+      ```
+   3. Add the following configuration:
       server {
           listen 80;
           server_name your_domain.com www.your_domain.com;
@@ -45,7 +46,7 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           }
       }
-   3. Enable the configuration:
+   4. Enable the configuration:
       ```bash
       sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/
       ```
