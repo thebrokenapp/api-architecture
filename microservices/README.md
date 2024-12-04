@@ -26,10 +26,10 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
    ```
 
    
-###Access NGINX Default Page**:
+### Access NGINX Default Page**:
    Open a web browser and navigate to your server’s IP address or `http://localhost`.
 
-### Configure NGINX for Your Application**:
+### Configure NGINX for Your Application:
    1. Create a new server block:
       ```bash
       sudo nano /etc/nginx/sites-available/myapp
