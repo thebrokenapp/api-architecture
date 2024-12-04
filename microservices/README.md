@@ -44,23 +44,17 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
    3. Add the following configuration:
       ```json
       server {
-    listen 80;
-    server_name 127.0.0.1;  # Replace with your actual domain or IP
-
-    # Routes handled by Flask on port 8000
-    
-
-    location  /payments  {
-        proxy_pass http://127.0.0.1:8000;
-    }
-
-    location  /user  {
-        proxy_pass http://127.0.0.1:8001;
-    }
-
-
-
-}
+         listen 80;
+         server_name 127.0.0.1;  # Replace with your actual domain or IP
+      
+         location  /payments  {
+            proxy_pass http://127.0.0.1:8000;
+         }
+         
+         location  /user  {
+            proxy_pass http://127.0.0.1:8001;
+         }
+      }
 
       ```
    4. Enable the configuration:
