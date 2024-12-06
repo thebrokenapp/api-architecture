@@ -26,4 +26,19 @@ CREATE TABLE posts (post_id TEXT, likes INTEGER, comments INTEGER, timestamps TE
 
 ## Install Redis
 
-## Create Interaction REST API
+## Install python dependencies
+```bash
+pip install redis
+```
+
+## Launch Request Response Based API
+```bash
+python request_response_api.py
+```
+## Check the response time in Postman
+```bash
+python event_driven_interaction.py
+```
+## Launch Event Driven API
+
+## Check response time in Postman
