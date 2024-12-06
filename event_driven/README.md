@@ -36,9 +36,17 @@ pip install redis
 python request_response_api.py
 ```
 ## Check the response time in Postman
+```javascript
+{
+    "post_id": "post1",
+    "interaction_type": "like",
+    "user_id": "user1"
+}
+```
+
+## Launch Event Driven API
 ```bash
 python event_driven_interaction.py
 ```
-## Launch Event Driven API
 
 ## Check response time in Postman
