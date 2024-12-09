@@ -161,7 +161,7 @@ groups = {}
 ### Add 3rd function `create_group()`
 ```python
 def create_group(group_name, members):
-    groups[group_name] = members
+    groups[group_name] = [members]
     status = "success"
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
