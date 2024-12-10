@@ -50,7 +50,7 @@ Overall your `POST /payments` should look like this:
 @app.route('/payments', methods=["POST"])
 @validate()
 def initiatePayment(body: Payment):
-	data = body.dict()				# extract the request body and store it in variable "data"
+	data = request.get_json()			# OR data = body.dict() extract the request body and store it in variable "data"
 	transaction_id = str(uuid.uuid4())		# create a new transaction ID using uuid() library
 	timestamp = datetime.utcnow()			# create a new timestamp to capture the transaction time
 	data["status"] = "initiated"			# by default all transactions starts with status as "initiated"
