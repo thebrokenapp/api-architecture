@@ -13,3 +13,8 @@ def get_all_payments():
 	return {"transactions": payments}
 
 ```
+
+## Get all query params in one go in dictionary
+```python
+query_params = request.args.to_dict()
+```
