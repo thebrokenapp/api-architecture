@@ -74,15 +74,18 @@ def getPayment(transaction_id):
 	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
 
 
-@app.route('/payments/<transaction_id>', methods = ["PUT"])
+@app.route('/payments/<transaction_id>', methods = ["PATCH"])
 def updatePayment(transaction_id):
-	data = request.get_json()							# extract the request body and store it in variable "data"
-	for payment in payments:							# loop over the list 
-		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
-			payment.update(data)						# update the previous JSON with new JSON
-			return payment                              # then return the item
+	data = request.get_json()
+	timestamp = datetime.utcnow()							
+	for payment in payments:							
+		if payment["transaction_id"] == transaction_id:	
+			payment["status"] = data["status"]						
+			payment["timestamp"] = timestamp
+			return payment                              
 
 	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
+
 
 @app.route('/payments/<transaction_id>', methods = ["DELETE"])
 def deletePayment(transaction_id):
