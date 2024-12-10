@@ -40,7 +40,7 @@ def updatePayment(body: Status, transaction_id: UUID4):
 	data = request.get_json()
 	timestamp = datetime.utcnow()							
 	for payment in payments:							
-		if payment["transaction_id"] == transaction_id:	
+		if payment["transaction_id"] == str(transaction_id):	
 			payment["status"] = data["status"]						
 			payment["timestamp"] = timestamp
 			return payment                              
