@@ -18,8 +18,7 @@ The following piece of code  needs to be added in the `updatePayment` function
 ```python
 data = request.get_json()
 timestamp = datetime.utcnow()							
-for payment in
-payments:							
+for payment in payments:							
 	if payment["transaction_id"] == transaction_id:	
 		payment["status"] = data["status"]						
 		payment["timestamp"] = timestamp
