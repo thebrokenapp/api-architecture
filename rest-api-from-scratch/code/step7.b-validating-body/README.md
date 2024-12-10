@@ -77,6 +77,23 @@ class Payment(BaseModel):
 	note: str = ''
 ```
 
+
+
 #### Postman
 * Try making request with correct and incorrect dataype
 * Try making request without some of the `required` field and confirm if it's getting rejected
+
+#### There are lot of validations that you can add
+For example: to make sure max-lenght of UPI id is 10 digit
+```python
+class Payment(BaseModel):
+    amount: int = Field(strict=True)
+    payer_upi: constr(max_length=10)  
+    payee_upi: str
+    note: str = ''
+```
+
+To ensure amount range is within `0` to `100000`
+```python
+amount: int = Field(gt=0, lt=1000000)
+```
