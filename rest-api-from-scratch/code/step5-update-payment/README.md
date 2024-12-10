@@ -77,8 +77,9 @@ def getPayment(transaction_id):
 
 	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
 
-
-data = request.get_json()
+@app.route('/payments/<transaction_id>', methods = ["PATCH"])
+def updatePayment(transaction_id):
+	data = request.get_json()
 	timestamp = datetime.utcnow()							
 	for payment in payments:							
 		if payment["transaction_id"] == transaction_id:	
@@ -86,8 +87,7 @@ data = request.get_json()
 			payment["timestamp"] = timestamp
 			return payment                              
 
-	return jsonify({"message": "Transaction not found"}),404
-
+	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
 
 if __name__ == "__main__":
 	app.run(host="127.0.0.1", port= 5000, debug=True)
