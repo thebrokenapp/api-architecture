@@ -8,7 +8,7 @@ This code will be added as another `@app.route` in you `app.py` file.
 #### Add New route
 We are adding the `PUT` request to the `/payments/{transaction_id}` path.
 ```python
-@app.route('/payments/<transaction_id>', methods = ["PUT"])
+@app.route('/payments/<transaction_id>', methods = ["PATCH"])
 def updatePayment(transaction_id):
 ```
 
@@ -16,13 +16,16 @@ def updatePayment(transaction_id):
 #### Attach the business logic to the route
 The following piece of code  needs to be added in the `updatePayment` function
 ```python
-	data = request.get_json()							# extract the request body and store it in variable "data"
-	for payment in payments:							# loop over the list 
-		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
-			payment.update(data)						# update the previous JSON with new JSON
-			return payment                              # then return the item
+data = request.get_json()
+timestamp = datetime.utcnow()							
+for payment in
+payments:							
+	if payment["transaction_id"] == transaction_id:	
+		payment["status"] = data["status"]						
+		payment["timestamp"] = timestamp
+		return payment                              
 
-	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404
+return jsonify({"message": "Transaction not found"}),404
 ```
 `Line1`: We get the payload from request and store it in data 
 variable
@@ -76,15 +79,15 @@ def getPayment(transaction_id):
 	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
 
 
-@app.route('/payments/<transaction_id>', methods = ["PUT"])
-def updatePayment(transaction_id):
-	data = request.get_json()							# extract the request body and store it in variable "data"
-	for payment in payments:							# loop over the list 
-		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
-			payment.update(data)						# update the previous JSON with new JSON
-			return payment                              # then return the item
+data = request.get_json()
+	timestamp = datetime.utcnow()							
+	for payment in payments:							
+		if payment["transaction_id"] == transaction_id:	
+			payment["status"] = data["status"]						
+			payment["timestamp"] = timestamp
+			return payment                              
 
-	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404 
+	return jsonify({"message": "Transaction not found"}),404
 
 
 if __name__ == "__main__":
