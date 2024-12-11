@@ -52,7 +52,7 @@ Create a function to connect to SQLite DB
 ```python
 # Function to connect to SQLite database
 def get_db_connection():
-    conn = sqlite3.connect('upi.db')
+    conn = sqlite3.connect('upi.db')	# This opens the connection to the database.
     conn.row_factory = sqlite3.Row  # Allow fetching rows as dictionaries
     return conn
 ```
@@ -71,8 +71,8 @@ def initiate_payment(body: PaymentBody):
 	timestamp = datetime.utcnow()			
 	status = "initiated"
 	
-	conn = get_db_connection()
-	cursor = conn.cursor()
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
 	cursor.execute('''INSERT INTO payments (transaction_id, amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?,?, ?, ?,?)''',
 	(transaction_id, amount, status, payer_upi, payee_upi, note, timestamp))
 	conn.commit()
