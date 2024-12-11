@@ -122,3 +122,23 @@ def updatePayment(transaction_id: UUID4, body: Status):
 
 	return jsonify({"message": "Transaction updated"})
 ```
+
+### Delete Payment
+#### Change `DELETE /payment/<transaction_id>`
+```python
+@app.route('/payments/<transaction_id>', methods = ["DELETE"])
+def deletePayment(transaction_id):
+	conn = get_db_connection()
+	cursor = conn.cursor()
+
+	cursor.execute('''DELETE FROM payments WHERE transaction_id = ?''', (transaction_id,))
+
+	if cursor.rowcount == 0:
+		conn.close()
+		return jsonify({"message": "Transaction not found"}),404
+
+	conn.commit()
+	conn.close()
+
+	return jsonify({"message": "Transaction deleted!"})
+```
