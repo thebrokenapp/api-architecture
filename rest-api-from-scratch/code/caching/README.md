@@ -1,6 +1,16 @@
+# Add caching to your Payments API
+
+## Install SQLite3 
+```bash
+sudo apt install sqlite3
+```
+Check if it's installed
+```bash
+sqlite3 --version
+```
 
 
-#### Create payments table
+## Create payments table
 ```sql
 CREATE TABLE payments (
     transaction_id TEXT PRIMARY KEY,
