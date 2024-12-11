@@ -69,6 +69,13 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
       sudo systemctl restart nginx
       ```
 
+#### Make requests from POSTMAN
+```url
+GET http://127.0.0.1:80/payments/c80e58fb-2806-48f1-9e40-90feeabd38c7
+GET http://127.0.0.1:80/users
+```
+
+
 #### Uninstalling nginx
 ```bash
 sudo systemctl stop nginx
