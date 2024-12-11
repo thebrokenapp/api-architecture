@@ -19,7 +19,7 @@ sqlite3 upi.db
 In the shell that opens up, enter:
 ```sql
 CREATE TABLE payments (
-    transaction_id TEXT PRIMARY KEY,
+    transaction_id TEXT,
     amount TEXT NOT NULL,
     status TEXT NOT NULL,
     payer_upi TEXT NOT NULL,
@@ -28,6 +28,13 @@ CREATE TABLE payments (
     timestamp TEXT NOT NULL
 );
 ```
+
+#### Upload payment.csv in the db
+```bash
+.mode csv
+.import /path/to/your/payments.csv payments
+```
+
 
 ## Redis
 ### Install Redis
