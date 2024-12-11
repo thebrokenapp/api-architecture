@@ -48,7 +48,7 @@ Add import statement
 import sqlite3
 ```
 
-Create a function to connect to SQLite DB
+#### Create a function to connect to SQLite DB
 ```python
 # Function to connect to SQLite database
 def get_db_connection():
@@ -57,7 +57,7 @@ def get_db_connection():
     return conn
 ```
 
-Change the `POST /payments` logic
+#### Change the `POST /payments` logic
 ```python
 @app.route('/payments', methods=['POST'])
 @validate()
@@ -79,4 +79,22 @@ def initiate_payment(body: PaymentBody):
 	conn.close()
  
 	return {"message": "transaction created", "transaction_id": transaction_id}
+```
+
+### Fetch Single Payment
+#### Change `GET /payments/<transaction_id>`
+```python
+@app.route('/payments/<transaction_id>')
+@validate()
+def getPayment(transaction_id: UUID4):
+	conn = get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute('SELECT * FROM payments WHERE transaction_id = ?', (str(transaction_id),))
+	payment = cursor.fetchone()
+	conn.close()
+	if payment is None:
+		return {"message": "Transaction not found"}, 404
+
+	return dict(payment)
+	
 ```
