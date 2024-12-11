@@ -28,3 +28,10 @@ CREATE TABLE payments (
     timestamp TEXT NOT NULL
 );
 ```
+
+## Redis
+### Install Redis
+Follow
+```url
+https://github.com/ankitforcodes/redis/blob/main/installing_on_ubuntu.txt
+```
