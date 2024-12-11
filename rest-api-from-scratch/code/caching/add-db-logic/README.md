@@ -98,3 +98,27 @@ def getPayment(transaction_id: UUID4):
 	return dict(payment)
 	
 ```
+
+### Update Payment
+#### Change `PATCH /payment/<transaction_id>
+```python
+@app.route('/payments/<transaction_id>', methods = ["PATCH"])
+@validate()
+def updatePayment(transaction_id: UUID4, body: Status):
+	data = request.get_json()
+	status = data.get("status")
+	transaction_id = str(transaction_id)
+	timestamp = datetime.utcnow()							
+	
+	conn = get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute('''UPDATE payments SET status = ?, timestamp = ? WHERE transaction_id = ? ''', (status, timestamp, transaction_id))
+	conn.commit()
+	conn.close()
+
+	if cursor.rowcount == 0:
+		conn.close()
+		return jsonify({"message": "Transaction not found"}),404
+
+	return jsonify({"message": "Transaction updated"})
+```
