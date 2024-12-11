@@ -31,7 +31,52 @@ CREATE TABLE payments (
 
 ## Redis
 ### Install Redis
-Follow
 ```url
 https://github.com/ankitforcodes/redis/blob/main/installing_on_ubuntu.txt
+```
+
+### Start Redis
+```bash
+redis-server redis.conf
+```
+
+
+## API Changes
+### POST /payments
+Add import statement
+```python
+import sqlite3
+```
+
+Create a function to connect to SQLite DB
+```python
+# Function to connect to SQLite database
+def get_db_connection():
+    conn = sqlite3.connect('upi.db')
+    conn.row_factory = sqlite3.Row  # Allow fetching rows as dictionaries
+    return conn
+```
+
+Change the `POST /payments` logic
+```python
+@app.route('/payments', methods=['POST'])
+@validate()
+def initiate_payment(body: PaymentBody):
+	data = request.get_json()
+	amount = data.get("amount")
+	payer_upi = data.get("payer_upi")
+	payee_upi = data.get("payee_upi")
+	note = data.get("note")				
+	transaction_id = str(uuid.uuid4())		
+	timestamp = datetime.utcnow()			
+	status = "initiated"
+	
+	conn = get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute('''INSERT INTO payments (transaction_id, amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?,?, ?, ?,?)''',
+	(transaction_id, amount, status, payer_upi, payee_upi, note, timestamp))
+	conn.commit()
+	conn.close()
+ 
+	return {"message": "transaction created", "transaction_id": transaction_id}
 ```
