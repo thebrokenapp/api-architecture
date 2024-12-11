@@ -30,7 +30,7 @@ def getPayment(transaction_id: UUID4):
 
   # Add these two extra lines
 	redis_key = str(transaction_id)
-	r.hmset(redis_key, dict(payment))
+	r.hset(redis_key, mapping=dict(payment))
 
 	return dict(payment)
 ```
