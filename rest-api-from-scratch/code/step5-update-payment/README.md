@@ -102,7 +102,7 @@ python app.py
 #### Make the API call using POSTMAN
 Make the API call to `/payments` endpoint in Postman to see if you are getting an empty response
 ```http
-PUT /payments/{transaction_id}
+PATCH /payments/{transaction_id}
 ```
 
 #### Sample Request Body
