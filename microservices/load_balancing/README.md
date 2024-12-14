@@ -103,6 +103,11 @@ server {
 nginx -t
 ```
 
+#### Create link to site-enabled
+```bash
+sudo ln -s /etc/nginx/sites-available/upi_load_balancing /etc/nginx/sites-enabled/
+```
+
 #### Restart NGINX
 ```bash
 sudo systemctl restart nginx
