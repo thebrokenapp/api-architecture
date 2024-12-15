@@ -17,17 +17,17 @@ python payment1.py
 if __name__ == "__main__":
 	app.run(host="127.0.0.1", port= 8001, debug=True)
 ```
-Start Payments API 1
+Start Payments API 2
 ```bash
 python payment2.py
 ```
 
-#### Payments API 1
+#### Payments API 3
 ```python
 if __name__ == "__main__":
 	app.run(host="127.0.0.1", port= 8002, debug=True)
 ```
-Start Payments API 1
+Start Payments API 3
 ```bash
 python payment3.py
 ```
