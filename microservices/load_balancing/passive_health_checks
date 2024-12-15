@@ -1,0 +1,25 @@
+# distributes load in ration 1:2:3
+upstream payments_nodes {
+   server 127.0.0.1:8001 weight=1 max_fails=3 fail_timeout=3s;
+   server 127.0.0.1:8002 weight=2 max_fails=3 fail_timeout=3s;
+   server 127.0.0.1:8003 weight=3 max_fails=3 fail_timeout=3s;
+}
+
+# distributes load in ration 2:3:4
+upstream users_nodes {
+   server 127.0.0.1:9000 weight=2 max_fails=3 fail_timeout=3s;
+   server 127.0.0.1:9001 weight=3 max_fails=3 fail_timeout=3s;
+   server 127.0.0.1:9002 weight=4 max_fails=3 fail_timeout=3s;
+}
+server {
+   listen 80;
+   server_name 127.0.0.1;  # Replace with your actual domain or IP
+
+      location /payments {
+         proxy_pass http://payments_nodes;
+      }
+
+      location /user {
+         proxy_pass http://users_nodes;
+      }
+}
