@@ -108,6 +108,12 @@ nginx -t
 sudo ln -s /etc/nginx/sites-available/upi_load_balancing /etc/nginx/sites-enabled/
 ```
 
+## Also Try
+#### Shutdown any one API
+* Send some requests
+* You will see that NGINX does not route any request to the failed server
+* Eventually none of your request actually fails
+* It just gets re-routed to other available servers
 #### Restart NGINX
 ```bash
 sudo systemctl restart nginx
