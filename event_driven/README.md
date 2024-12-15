@@ -33,7 +33,7 @@ pip install redis
 
 ## Launch Request Response Based API
 ```bash
-python request_response_api.py
+python event_driven_interaction.py
 ```
 ## Check the response time in Postman
 ```javascript
