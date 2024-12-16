@@ -92,7 +92,7 @@ server {
          proxy_pass http://payments_nodes;
       }
 
-      location /user {
+      location /users {
          proxy_pass http://users_nodes;
       }
 }
