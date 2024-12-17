@@ -20,7 +20,7 @@ def update_like_count(post_id):
     conn.close()
 
 
-pubsub.subscribe('new_post_channel')  # Subscribe to the relevant channel
+pubsub.subscribe('likes-channel')  # Subscribe to the relevant channel
 
 for message in pubsub.listen():
     if message['type'] == 'message':
