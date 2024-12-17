@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
 import redis
+import json
 
 app = Flask(__name__)
 
@@ -10,7 +11,7 @@ redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=T
 def add_like():
     data = request.get_json()
     channel = "likes-channel"
-    redis_client.publish(channel, str(data))
+    redis_client.publish(channel, json.dumps(data))
 
     return jsonify({"message": "Like added successfully"}), 200
 
