@@ -23,6 +23,5 @@ paths:
                 type: object
                 properties:
                   message:
-                    type:
-                      string
+                    type: string
   /payments: {}
