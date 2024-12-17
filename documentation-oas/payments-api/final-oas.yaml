@@ -125,7 +125,60 @@ paths:
                     "payee_upi": "abc@okicici"
                     "payer_upi": "xyz@okhdfc"
                     
-                  
+    get:
+      summary: Retrieve payment details by status
+      description: Returns a list of payment details filtered by the given status.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Filter payments by their status.
+          schema:
+            type: string
+            example: initiated
+      responses:
+        '200':
+          description: A list of payment details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  amount:
+                    type: integer
+                    format: int32
+                    description: The payment amount.
+                    example: 130
+                  note:
+                    type: string
+                    description: Additional notes about the payment.
+                    example: Books
+                  payee_upi:
+                    type: string
+                    description: UPI ID of the payee.
+                    example: qwe-sbi
+                  payer_upi:
+                    type: string
+                    description: UPI ID of the payer.
+                    example: abx@okhdfc
+                  status:
+                    type: string
+                    description: Status of the payment.
+                    example: initiated
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the payment was created.
+                    example: Tue, 23 Jul 2024 14:16:27 GMT
+                  transaction_id:
+                    type: string
+                    format: uuid
+                    description: Unique identifier for the transaction.
+                    example: 8040cb86-04a2-492b-9b0a-c1b3a450c509
+        '400':
+          description: Invalid status query parameter.
+        '500':
+          description: Internal server error.              
   /payments/{transaction_id}:
     put:
       description: Updating a transaction by transaction ID
