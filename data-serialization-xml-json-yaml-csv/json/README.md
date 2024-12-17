@@ -21,7 +21,7 @@ npm install -g json-server
 ### Sample Transaction Data
 ```bash
 {
-      "transactionId": "9e8d1223-c25a-4845-a37d-1a24f1e96d86",
+      "id": "9e8d1223-c25a-4845-a37d-1a24f1e96d86",
       "timestamp": "2024-07-07T16:00:55.393Z",
       "amount": 67218,
       "currency": "EUR",
@@ -57,10 +57,10 @@ https://www.jsongenerator.io/
 ### JSON Generator Template
 ```bash
 {
-  "upi":[
+  "payments":[
     "repeat(10)",
     {
-      "transactionId": "guid()",
+      "id": "guid()",
       "timestamp": "date(2024-07-01, 2024-07-10)",
       "amount": "int(10,100000)",
       "currency": "enum(INR,USD,EUR)",
