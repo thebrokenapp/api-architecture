@@ -3,7 +3,6 @@
 
 #### Python Package Installation
 ```bash
-  pip install flask
   pip install prometheus-flask-exporter
 ```
 
