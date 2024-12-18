@@ -166,7 +166,7 @@ RESPONSE CODES
 ### AlertManager
 Download the alertmanager from
 ```url
-https://github.com/prometheus/alertmanager/releases/download/v0.27.0/alertmanager-0.27.0.windows-amd64.zip
+wget https://github.com/prometheus/alertmanager/releases/download/v0.28.0-rc.0/alertmanager-0.28.0-rc.0.linux-amd64.tar.gz
 ```
 
 Extract the content on the zip file in your `monitoring-api` folder
