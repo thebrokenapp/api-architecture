@@ -115,6 +115,20 @@ Credentials
 username: admin
 password: admin
 ```
+#### Add Prometheus as the data source to Grafana
+* Go to Grafana Menu
+* Click on Data Sources
+* Add Data source
+* In the URL, give the URL where Prometheus is running: `http://127.0.0.1:9090`
+* Click on Save and Test
+
+#### Server Monitoring (CPU, RAM, Disk, Network, etc)
+* Click on Grafana Menu
+* Dashobards -> Import
+* Use the code `1860`
+* Name the dashboard
+* Choose data source as prometheus
+
 
 ### AlertManager
 Download the alertmanager from
