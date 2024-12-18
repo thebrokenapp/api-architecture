@@ -155,6 +155,13 @@ TRAFFIC
 rate(
   flask_http_request_total[30s]
 )
+
+
+RESPONSE CODES
+* Success: flask_http_request_total{status="200"}
+* Created: flask_http_request_total{status="201"}
+* Not Found: flask_http_request_total{status="404"}
+* Deleted: flask_http_request_total{status="204"}
 ```
 ### AlertManager
 Download the alertmanager from
