@@ -16,6 +16,7 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+
 class Payment(BaseModel):
 	amount : int = Field(gt=0, le=100000)
 	payer_upi : str
@@ -80,3 +81,6 @@ def deletePayment(transaction_id):
 
 if __name__ == "__main__":
 	app.run(host="127.0.0.1", port= 5000, debug=True)
+
+
+#storage_uri="redis://localhost:6379/0"
