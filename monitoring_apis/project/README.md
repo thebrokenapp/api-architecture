@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
 Check if your API is exporting metrics
 ```bash
-Go to http://127.0.0.1:5000/metrics
+Go to http://127.0.0.1:8000/metrics
 ```
 
 
