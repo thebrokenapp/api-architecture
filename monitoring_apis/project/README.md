@@ -21,7 +21,7 @@ Go to http://127.0.0.1:5000/metrics
 
 #### Start the Mock Events app:
 ```bash
-python generate_events.py
+python payments_traffic_generator.py
 OR
 Start locustfile to generate load
 ```
