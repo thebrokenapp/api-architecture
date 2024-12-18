@@ -26,5 +26,5 @@ For both the commands, you should get a version number as an output like: v20.15
 
 ## Start Swagger Editor Server
 ```bash
- http-server swagger-editor-master --cors
+ http-server swagger-editor-master
 ```
