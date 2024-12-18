@@ -129,7 +129,33 @@ password: admin
 * Name the dashboard
 * Choose data source as prometheus
 
+#### API Dashboards
+```bash
+REQUESTS:
+1. Total HTTP Requests:
+	sum(flask_http_request_total)
+2. Total GET Requests:
+	sum(flask_http_request_total{method="GET"})
+2. Total POST Requests:
+	sum(flask_http_request_total{method="POST"})
+2. Total PATCH Requests:
+	sum(flask_http_request_total{method="PATCH"})
+2. Total DELETE Requests:
+	sum(flask_http_request_total{method="DELETE"})
 
+
+LATENCY
+* GET ALL Payments: (flask_http_request_duration_seconds_sum{path="/payments", method="GET"}/flask_http_request_duration_seconds_count{path="/payments",method="GET"})*1000
+* Make a Payment: (flask_http_request_duration_seconds_sum{path="/payments", method="POST"}/flask_http_request_duration_seconds_count{path="/payments",method="POST"})*1000
+* Delete a Payment: (sum(flask_http_request_duration_seconds_sum{method="DELETE"})/sum(flask_http_request_duration_seconds_count{method="DELETE"}))*1000
+* Update a payment: (sum(flask_http_request_duration_seconds_sum{method="PATCH"})/sum(flask_http_request_duration_seconds_count{method="PATCH"}))*1000
+
+
+TRAFFIC
+rate(
+  flask_http_request_total[30s]
+)
+```
 ### AlertManager
 Download the alertmanager from
 ```url
