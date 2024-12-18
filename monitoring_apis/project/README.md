@@ -13,6 +13,13 @@ from prometheus_flask_exporter import PrometheusMetrics
 app = Flask(__name__)
 PrometheusMetrics(app)
 ```
+
+Make sure you don't have debug as `True` in the startup
+```python
+if __name__ == "__main__":
+	app.run(host="0.0.0.0", port= 8000)
+```
+
 Check if your API is exporting metrics
 ```bash
 Go to http://127.0.0.1:5000/metrics
