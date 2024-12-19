@@ -55,3 +55,11 @@ def sign_up():
 	#users[request_user_name] = hashed_password
 	return {"message":"User created"}
 ```
+
+#### Make a request to protected route
+```python
+@app.route('/apiStatus', methods=['GET'])
+@auth.login_required
+def api_status():
+	return {"message": "API is up!"}
+```
