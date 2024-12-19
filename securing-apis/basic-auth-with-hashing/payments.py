@@ -4,146 +4,209 @@ from datetime import datetime
 import uuid
 from pydantic import BaseModel, Field, UUID4
 from flask_pydantic import validate
-import random
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import sqlite3
+import redis
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#from prometheus_flask_exporter import PrometheusMetrics
 
-class Payment(BaseModel):
-	amount : int
-	payer_upi : str
-	payee_upi: str
+r = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+
+
+
+# Function to connect to SQLite database
+def get_db_connection():
+    conn = sqlite3.connect('upi.db')	# This opens the connection to the database.
+    conn.row_factory = sqlite3.Row  # Allow fetching rows as dictionaries
+    return conn
+
+
+
+
+
+payments = []
+users = dict()
+
+
+
+class PaymentBody(BaseModel):
+	amount : int = Field(gt=0, lt=1000000)
+	payer_upi : str = Field(min_length = 5, max_length= 25)
+	payee_upi: str = Field(min_length = 5, max_length= 25)
 	note: str = ''
 
 	class Config:
 		extra = "forbid"
 
-class SignUp(BaseModel):
-	username : str
-	password : str
-	mobile: str
+class Status(BaseModel):
+	status: str
 
-	class Config:
-		extra = "forbid"
+
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
-#PrometheusMetrics(app)
+PrometheusMetrics(app)
 
 
-users_database = {}
+
+users = {}
 
 
 @auth.verify_password
 def verify_password(username, password):
-    if username in users_database and check_password_hash(users_database.get(username), password):
+    if username in users and check_password_hash(users.get(username), password):
         return username
 
-@app.route('/apiStatus')
-@auth.login_required
-def status():
-	return {"message": "API is up!"}
 
 
 
-payments = []
-my_users = []
-
-
-@app.route('/payments', methods=["GET"])
-@auth.login_required
-def getPayments():
-	return {"data": payments}
-
-
-
-@app.route('/payments', methods=["POST"])
-@validate()
-@auth.login_required
-def initiatePayment(body: Payment):
-	data = body.dict()				# extract the request body and store it in variable "data"
-	txn_id = str(uuid.uuid4())		# create a new transaction ID using uuid() library
-	current_timestamp = datetime.utcnow()			# create a new timestamp to capture the transaction time
-	data["status"] = "initiated"			# by default all transactions starts with status as "initiated"
-	data["transaction_id"] = txn_id	# Attach transaction ID in the requestbody
-	data["timestamp"] = current_timestamp 			# Attach timestamp in the request body
-	payments.append(data)					# Add the request body in our "payments" database
- 
-	return data						# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
+def get_username():
+    # Assuming the username is sent in the 'X-Username' header
+    username = request.headers.get("X-Username")
+    if not username:
+        # If no username is provided, use IP
+        return request.remote_addr
+    return username
 
 
 
-@app.route('/payments/<transaction_id>')
-@validate()
-@auth.login_required
-def getPayment(transaction_id: UUID4):
-	for payment in payments:
-		if payment["transaction_id"] == str(transaction_id):
-			return payment
 
-	return jsonify({"message": "Transaction not found"}),404
+limiter = Limiter(
+    key_func=get_username,
+    app=app,
+    default_limits=["20 per day", "5 per minute", "2 per second"],
+    storage_uri="redis://localhost:6379/0",
+)
 
 
-
-@app.route('/payments/note/<note>')
-@auth.login_required
-def getPaymentByNote(note):
-	for payment in payments:
-		if payment["note"] == note:
-			return payment
-
-	return jsonify({"message": "Transaction not found"}),404
-
-
-@app.route('/payments/<transaction_id>', methods = ["PUT"])
-@auth.login_required
-def updatePayment(transaction_id):
-	data = request.get_json()							# extract the request body and store it in variable "data"
-	for payment in payments:							# loop over the list 
-		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
-			payment.update(data)						# update the previous JSON with new JSON
-			return payment                              # then return the item
-
-	return jsonify({"message": "Transaction not found"}),404   # otherwise return 404
-
-
-@app.route('/payments/<transaction_id>', methods = ["DELETE"])
-@auth.login_required
-def deletePayment(transaction_id):
-	for index, payment in enumerate(payments):			# loop over the list 
-		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
-			payments.pop(index)							# update the previous JSON with new JSON
-			return Response({"message": "Resource deleted!"},  status=204)                 # then return the item
-
-	return jsonify({"message": "Transaction not found"}),200   # otherwise return 404
-
-
-
-@app.route('/signUp', methods=["POST"])
-def signUp():
+@app.route('/user', methods=["POST"])
+def sign_up():
 	data = request.get_json()				
 	request_user_name= data["user_name"]
 	request_password = data["password"]
 	hashed_password = generate_password_hash(request_password)
 	
-	users_database[request_user_name] = hashed_password
+	users[request_user_name] = hashed_password
 	
-	print(users_database)				
+	print(users)				
  
-	return {"message":"User created"}						
+	return {"message":"User created"}
 
-@app.route('/random', methods=["GET"])
-def random_path():
-	number = random.randint(1, 10)
-	if number < 3:
-		return jsonify({"message": "Sending 201"}),201
-	if number == 4:
-		return jsonify({"message": "Sending 201"}),403
-	if number >= 5:
-		return jsonify({"message": "Sending 201"}),500
+
+
+@app.route('/apiStatus', methods=['GET'])
+@limiter.limit("5 per day")
+@auth.login_required
+def api_status():
+	return {"message": "API is up!"}
+
+
+@app.route('/payments', methods=['GET'])
+@auth.login_required
+def get_all_payments():
+	status = request.args.get('status')
+	if status is not None:
+		return_list = []
+		for txn in payments:
+			if txn["status"] == status:
+				return_list.append(txn)
+		return {"transactions": return_list}
+
+	return {"transactions": payments}
+
+
+@app.route('/payments', methods=['POST'])
+@validate()
+def initiate_payment(body: PaymentBody):
+	data = request.get_json()
+	amount = data.get("amount")
+	payer_upi = data.get("payer_upi")
+	payee_upi = data.get("payee_upi")
+	note = data.get("note")				
+	transaction_id = str(uuid.uuid4())		
+	timestamp = datetime.utcnow()			
+	status = "initiated"
+	
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute('''INSERT INTO payments (transaction_id, amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?,?, ?, ?,?)''',
+	(transaction_id, amount, status, payer_upi, payee_upi, note, timestamp))
+	conn.commit()
+	conn.close()
+ 
+	return {"message": "transaction created", "transaction_id": transaction_id},201
+
+
+@app.route('/payments/<transaction_id>', methods=['GET'])
+@validate()
+def getPayment(transaction_id: UUID4):
+	redis_key = str(transaction_id)
+
+	cache_data = r.hgetall(redis_key)
+
+	if cache_data:
+		print("data came from redis")
+		return jsonify(cache_data)
 	else:
-		return jsonify({"message": "Sending 201"}),204	
+		print("data came from sqlite3")
+		conn = get_db_connection()
+		cursor = conn.cursor()
+		cursor.execute('SELECT * FROM payments WHERE transaction_id = ?', (str(transaction_id),))
+		payment = cursor.fetchone()
+		conn.close()
+		if payment is None:
+			return {"message": "Transaction not found"}, 404
+
+		r.hset(redis_key, mapping = dict(payment))
+
+	return dict(payment)
+
+
+
+@app.route('/payments/<transaction_id>', methods = ["PATCH"])
+@validate()
+def updatePayment(transaction_id: UUID4, body: Status):
+	data = request.get_json()
+	status = data.get("status")
+	transaction_id = str(transaction_id)
+	timestamp = datetime.utcnow()							
+	
+	conn = get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute('''UPDATE payments SET status = ?, timestamp = ? WHERE transaction_id = ? ''', (status, timestamp, transaction_id))
+	conn.commit()
+	conn.close()
+
+	if cursor.rowcount == 0:
+		#conn.close()
+		return jsonify({"message": "Transaction not found"}),404
+
+
+	r.delete(transaction_id)
+	return jsonify({"message": "Transaction updated"})
+
+
+@app.route('/payments/<transaction_id>', methods = ["DELETE"])
+def deletePayment(transaction_id):
+	conn = get_db_connection()
+	cursor = conn.cursor()
+
+	cursor.execute('''DELETE FROM payments WHERE transaction_id = ?''', (transaction_id,))
+
+	if cursor.rowcount == 0:
+		conn.close()
+		return jsonify({"message": "Transaction not found"}),404
+
+	conn.commit()
+	conn.close()
+
+	return jsonify({"message": "Transaction deleted!"})
+
+
 
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", port= 5000)
+	app.run(host="0.0.0.0", port= 8000)
