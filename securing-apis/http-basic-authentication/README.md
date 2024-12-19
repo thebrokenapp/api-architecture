@@ -24,7 +24,7 @@ def verify_password(username, password):
         return username
 ```
 
-Protect all your routes behind password except /signUp
+Protect all your routes behind password using `@auth.login_required`
 ```python
 @app.route('/apiStatus')
 @auth.login_required
