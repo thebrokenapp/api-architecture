@@ -1,5 +1,21 @@
 # Hash Password 
 
+
+#### Create `users` table in SQLite3
+Enter in your UPI DB
+```bash
+sqlite3 upi.db
+```
+Create table
+```sql
+CREATE TABLE users (
+    user_name TEXT UNIQUE NOT NULL,
+    hashed_password TEXT NOT NULL
+);
+```
+
+
+
 #### Import Library
 ```python
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -14,8 +30,16 @@ users = dict()
 ```python
 @auth.verify_password
 def verify_password(username, password):
-    if username in users and check_password_hash(users.get(username), password):
-        return username
+	conn = get_db_connection()
+	cursor = conn.cursor()
+	cursor.execute('SELECT hashed_password FROM users WHERE user_name = ?', (username,))
+	password_row = cursor.fetchone()
+	retrieved_password = password_row["hashed_password"]
+	print("password from sqlite3:",retrieved_password)
+	print("password from Auth header", password)
+	conn.close()
+	if check_password_hash(retrieved_password, password):
+		return username
 ```
 
 #### Create `/user` route
@@ -26,10 +50,13 @@ def sign_up():
 	request_user_name= data["user_name"]
 	request_password = data["password"]
 	hashed_password = generate_password_hash(request_password)
-	
-	users[request_user_name] = hashed_password
-	
-	print(users)				
- 
+	print(request_user_name, hashed_password)
+
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute('''INSERT INTO users (user_name, hashed_password) VALUES (?, ?)''',(request_user_name, hashed_password))
+	conn.commit()
+	conn.close()
+	#users[request_user_name] = hashed_password
 	return {"message":"User created"}
 ```
