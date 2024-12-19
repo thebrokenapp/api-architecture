@@ -21,11 +21,6 @@ CREATE TABLE users (
 from werkzeug.security import generate_password_hash, check_password_hash
 ```
 
-#### Create an empty users DB
-```
-users = dict()
-```
-
 #### Add password checking logic
 ```python
 @auth.verify_password
