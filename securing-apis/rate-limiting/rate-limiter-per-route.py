@@ -50,7 +50,7 @@ PrometheusMetrics(app)
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["10 per day", "2 per hour"],
+    default_limits=["10 per day", "4 per hour"],
     storage_uri="redis://localhost:6379/0",
 )
 
@@ -63,7 +63,7 @@ def api_status():
 
 
 @app.route('/payments', methods=['GET'])
-@limiter.limit("1/hour", override_defaults=False)
+@limiter.limit("6/hour", override_defaults=False)
 def get_all_payments():
 	status = request.args.get('status')
 	if status is not None:
