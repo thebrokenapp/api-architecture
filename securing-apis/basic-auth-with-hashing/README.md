@@ -29,6 +29,8 @@ def verify_password(username, password):
 	cursor = conn.cursor()
 	cursor.execute('SELECT hashed_password FROM users WHERE user_name = ?', (username,))
 	password_row = cursor.fetchone()
+	if password_row is None:
+		return None
 	retrieved_password = password_row["hashed_password"]
 	print("password from sqlite3:",retrieved_password)
 	print("password from Auth header", password)
