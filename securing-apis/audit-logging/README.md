@@ -55,3 +55,11 @@ python payments_audit.py
 ```bash
 cat audit.lgo
 ```
+
+#### If you want to disable logs from Flask
+```python
+# Disable the defaul INFO level logging from Flask
+# by setting Flask level logging to WARNING
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.WARNING)
+```
