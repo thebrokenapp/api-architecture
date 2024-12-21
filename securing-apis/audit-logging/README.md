@@ -19,26 +19,31 @@ audit_logger = logging.getLogger('audit')
 
 #### Add `before_request` and `after_request`
 ```python
-# Before request hook
+# Get executed Before request reaches the actual route 
 @app.before_request
 def before_request():
-    # You can log every incoming request here (for audit, debugging, etc.)
-    auth_header = request.headers.get('Authorization')
-    request.username = "anonymous"
-    if auth_header and auth_header.startswith('Basic '):
-	    encoded_credentials = auth_header.split(' ')[1]
-	    decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
-	    request.username, _ = decoded_credentials.split(':', 1)
+	auth_header = request.headers.get('Authorization')
+	if auth_header:
+		auth_header = auth_header.split(' ')
+		encoded_credentials = auth_header[1]
+		decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
+		request.username = decoded_credentials.split(':')[0]
+	else:
+		request.username = "anonymous"
+	
+	if not request.headers.get('X-Request-GUID'):
+		request.guid = str(uuid.uuid4())  # Store GUID in the request object
+	else:
+		request.guid = request.headers.get('X-Request-GUID')
+	audit_logger.info(f"Request -> User: {request.username} | Request GUID: {request.guid} | Action: {request.method} | Resource: {request.path}")
 
-    request.guid = str(uuid.uuid4())  # Store GUID in the request object
-    audit_logger.info(f"User: {request.username} Request GUID: {request.guid} - Incoming request: {request.method} {request.path}")
-
-# After request hook
+# Gets executed after request is processed by the route
 @app.after_request
 def after_request(response):
-    # You can log the response or modify it here (e.g., log status codes, modify headers)
-    response.headers['X-Request-GUID'] = request.guid    # Add GUID to the response headers
-    audit_logger.info(f"User: {request.username} Response GUID: {request.guid} - Response: {response.status_code} for {request.method} {request.path}")
+	# You can log the response or modify it here (e.g., log status codes, modify headers)
+	response.headers['X-Request-GUID'] = request.guid    # Add GUID to the response headers
+	audit_logger.info(f"Response -> User: {request.username} | Response GUID: {request.guid} | Result: {response.status_code}")
+	return response
 ```
 
 #### Run file
