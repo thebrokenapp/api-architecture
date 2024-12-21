@@ -53,7 +53,7 @@ python payments_audit.py
 
 #### Check content of  audit.log file
 ```bash
-cat audit.lgo
+cat audit.log
 ```
 
 #### If you want to disable logs from Flask
