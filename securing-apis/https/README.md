@@ -19,6 +19,7 @@ touch ~/myCA/myCAindex                   -> needed for some internal file and ce
 This will create a private key for your CA (myCA.key) with encryption.
 You'll need to set a password for this key
 Remember this password - as it will be needed everytime to sign any certificate
+`-aes256` adds extra layer of password protection on CA's private key. CA private key is highly sensitive as its used to sign requestor's public key
 ```bash
 openssl genpkey -algorithm RSA -out ~/myCA/private/myCA.key -aes256
 chmod 400 ~/myCA/private/myCA.key
