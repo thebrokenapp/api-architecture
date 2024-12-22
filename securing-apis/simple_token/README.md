@@ -36,40 +36,60 @@ def login():
     username = auth.current_user()  # Get the authenticated username
     # Generate a token (for simplicity, using a random UUID)
     token = str(uuid.uuid4())
-    
+    r.setex(token, 120, username)	# store the token as key and username as value in Redis with a TTL of 2 mins
     # Store the token in the token store
-    token_store[token] = username
+    #token_store[token] = username
     return jsonify({"token": token}), 200
 ```
 
 #### Protect the routes behind @token_required decorator
+Pass the `username` argument to the function and return the username in response too. This shows the capability of finding out the user from the token provided
 ```python
 # Status route
-@app.route('/apiStatus')
+@app.route('/payments', methods=['GET'])
 @token_required
-def status(username):
-    return {"message": "API is up!, " + username}
+def get_all_payments(username):
+	status = request.args.get('status')
+	if status is not None:
+		return_list = []
+		for txn in payments:
+			if txn["status"] == status:
+				return_list.append(txn)
+		return {"transactions": return_list}
+
+	return {"transactions": payments, "requested_by": username}
 ```
 
 #### Add token_required function
 ```python
-# A simple decorator to check token in the request
-# custom decorator must return a function
 def token_required(f):
     @wraps(f)
     def wrapper():
         try:
             token = request.headers.get('Authorization').split("Bearer ")[1]
-            print("From header: ", token)
-            if not token or token not in token_store:
-                return {"msg": "No token provided"}, 401
-                #abort(401, description="Unauthorized: Invalid or missing token")
+            if not token:
+            	return {"msg": "No token provided"}, 401
 
-            # Optional: You can access user info from token
-            username = token_store[token]
+            username = r.get(token)
+            if not username:
+            	return {"msg": "Token expired!"}, 401
 
             return f(username)
         except:
             return {"msg": "No token provided"}, 401
     return wrapper
 ```
+
+#### Check the increase in speed!
+Keep any other route still behind simple auth which check username password again using hashing
+```python
+@app.route('/apiStatus', methods=['GET'])
+@limiter.limit("8000 per day")
+@auth.login_required
+def api_status():
+	print("User is: ", auth.current_user())
+	return {"message": "API is up!"}
+```
+
+Make an API request to `/apiStatus` and compare the speed!
+Any route behind `Token` auth is at least 5X faster than routes behind `Basic` auth
