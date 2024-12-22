@@ -1,5 +1,32 @@
 ## Adding Token Based Auth to Payment API
 
+
+#### Change your `@app.before_request
+Now we have one endpoint `/login` that taken in UN:Password and other endpoints `/payments` that takes in Token
+```python
+# Before request hook
+@app.before_request
+def before_request():
+	auth_header = request.headers.get('Authorization')
+	if auth_header:
+		auth_header = auth_header.split(' ')
+		if auth_header[0] == "Bearer":
+			request.username = "Token Based User"
+		elif auth_header[0] == "Basic":
+			encoded_credentials = auth_header[1]
+			decoded_credentials = base64.b64decode(encoded_credentials).decode('utf-8')
+			request.username = decoded_credentials.split(':')[0]
+	else:
+		request.username = "anonymous"
+	
+	if not request.headers.get('X-Request-GUID'):
+		request.guid = str(uuid.uuid4())  # Store GUID in the request object
+	else:
+		request.guid = request.headers.get('X-Request-GUID')
+	audit_logger.info(f"Request -> User: {request.username} | Request GUID: {request.guid} | Action: {request.method} | Resource: {request.path}")
+```
+
+
 #### Implement /login route to create tokens
 ```python
 # Login route to authenticate and generate a token
