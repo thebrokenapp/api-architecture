@@ -1,5 +1,9 @@
 ## Adding Token Based Auth to Payment API
 
+#### Add import statement
+```python
+from functools import wraps
+```
 
 #### Change your `@app.before_request
 Now we have one endpoint `/login` that taken in UN:Password and other endpoints `/payments` that takes in Token
