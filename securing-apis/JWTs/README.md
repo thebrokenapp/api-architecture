@@ -18,6 +18,12 @@ import jwt
 import datetime
 ```
 
+#### Add secrte key
+```python
+app.config['SECRET_KEY'] = "mysecretkey"
+```
+
+
 #### Update your `/login` route
 Note how we have removed the logic to store token in Redis.
 This is the idea of stateless token (we dont store token on the server side at all)
