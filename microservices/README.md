@@ -73,6 +73,23 @@ def get_one_user(user_name):
 	return jsonify(user_data), 200
 ```
 
+#### Delete a user
+```python
+@app.route('/users/<user_name>', methods=['DELETE'])
+def delete_one_user(user_name):
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute("""DELETE FROM users WHERE user_name = ?""", (user_name,))
+	conn.commit()
+
+	if cursor.rowcount == 0:  # Check if no rows were deleted
+		conn.close()
+		return {"message": "User not found"}, 404
+
+	conn.close()
+	return {}, 204
+```
+
 
 **Install NGINX**:
    ```bash
