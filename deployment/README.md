@@ -62,4 +62,35 @@ Environment="PATH=/dev_box/trainings/npci-hyd-jan-2025/api_env/bin"
 WantedBy=multi-user.target
 ```
 
+### If you are not sure about your `user` or `group` details, you can find out
+```bash
+whoami    => this will give user name
+groups    => this will give group name
+id        => for other details
+```
 
+
+### Start and Enable Service
+```bash
+sudo systemctl start payments
+sudo systemctl enable payments
+```
+
+### Check Service Status
+```bash
+sudo systemctl status payments
+```
+
+### Check logs for your service:
+```bash
+journalctl -u payments -f
+```
+Keep the logs running and try killing one process in another terminal
+
+### Kill the service and see the effect on logs
+```bash
+ps ax | grep payments:app
+kill -9 <pid>
+```
+
+### Try rebooting server and check if API is up after restart too
