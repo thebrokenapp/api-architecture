@@ -1,5 +1,5 @@
 # Microservices with API Gateway
-## Steps involved
+## High Level Steps involved
 #### 1. Start payments api on port 8000
 #### 2. Start users api on port 8001
 #### 3. Install Nginx
