@@ -95,7 +95,11 @@ def delete_one_user(user_name):
 Is this a microservice or monolith?
 ```
 
-
+## Separate Payments and User functionality in different microservices
+```bash
+Payments API 5000
+Users API 5001
+```
 
 
 **Install NGINX**:
