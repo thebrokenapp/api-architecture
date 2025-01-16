@@ -90,6 +90,13 @@ def delete_one_user(user_name):
 	return {}, 204
 ```
 
+#### Question
+```http
+Is this a microservice or monolith?
+```
+
+
+
 
 **Install NGINX**:
    ```bash
