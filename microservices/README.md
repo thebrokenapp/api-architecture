@@ -55,6 +55,24 @@ def get_all_users():
 	return {"users": users_list},200
 ```
 
+#### Fetch One User
+```python
+@app.route('/users/<user_name>', methods=['GET'])
+def get_one_user(user_name):
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute('''SELECT * FROM users where user_name = ?''',(user_name,))
+	user = cursor.fetchone()
+
+	if user is None:
+		conn.close()
+		return {"message": "User not found"}, 404
+
+	user_data = {"user_name": user[0], "password": user[1], "date": user[2], "product": user[3]}
+	conn.close()
+	return jsonify(user_data), 200
+```
+
 
 **Install NGINX**:
    ```bash
