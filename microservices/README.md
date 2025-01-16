@@ -10,6 +10,38 @@
 This guide provides steps to install and configure NGINX on an Ubuntu system to serve your applications.
 
 ## Steps
+### Users Service
+#### Create a users table
+```bash
+sqlite3 upi.db
+CREATE TABLE users (
+    username TEXT,
+    password TEXT,
+    registration_date TEXT,
+    product TEXT
+);
+```
+#### Sign Up (Create a user)
+```python
+@app.route('/users', methods=['POST'])
+def create_user():
+	data = request.get_json()				   # extract the request body and store it in variable "data"
+	user_name = data.get("user_name")		# extract user name from request body
+	password = data.get("password")			# extract password from request body
+	registration_date = datetime.utcnow()
+	product = data.get("product")
+	
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute('''INSERT INTO users (user_name, password, registration_date, product) VALUES (?, ?, ?,?)''',
+	(user_name, password, registration_date, product))
+	conn.commit()
+	conn.close()
+	return {"message": "User created"},201
+```
+
+
+
 **Install NGINX**:
    ```bash
    sudo apt update
