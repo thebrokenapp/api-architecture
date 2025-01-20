@@ -30,7 +30,7 @@ def status():
 
 payments = []
 
-@app.route('/payments')
+@app.route('/payments/<user_name>')
 ```
 
 #### Attach the business logic to the route
@@ -46,8 +46,13 @@ def status():
 
 payments = []
 
-@app.route('/payments')
-def getPayments():
+@app.route('/payments/<user_name>')
+def getPayments(user_name):
+	payment_list = []
+	for payment in payments:
+		if payment["user_name"] == user_name:
+			payment_list.append(payment)
+	return {"payments": payment_list}
 ```
 
 #### Return the `payments` list
@@ -65,9 +70,13 @@ def status():
 
 payments = []
 
-@app.route('/payments')
-def getPayments():
-	return {"payments": payments}
+@app.route('/payments/<user_name>')
+def getPayments(user_name):
+	payment_list = []
+	for payment in payments:
+		if payment["user_name"] == user_name:
+			payment_list.append(payment)
+	return {"payments": payment_list}
 ```
 
 #### Add the server and port details
@@ -82,9 +91,13 @@ def status():
 
 payments = []
 
-@app.route('/payments')
-def getPayments():
-	return {"payments": payments}
+@app.route('/payments/<user_name>')
+def getPayments(user_name):
+	payment_list = []
+	for payment in payments:
+		if payment["user_name"] == user_name:
+			payment_list.append(payment)
+	return {"payments": payment_list}
 
 
 if __name__ == "__main__":
@@ -95,7 +108,7 @@ if __name__ == "__main__":
 #### Make the API call using POSTMAN
 Make the API call to `/payments` endpoint in Postman to see if you are getting an empty response
 ```http
-GET /payments
+GET /payments/ankit
 ```
 
 
