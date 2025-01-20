@@ -36,6 +36,15 @@ from datetime import datetime
 import sqlite3
 ```
 
+#### DB Connection Logic
+```python
+def get_db_connection():
+    conn = sqlite3.connect('messaging.db')    # This opens the connection to the database.
+    conn.row_factory = sqlite3.Row  # Allow fetching rows as dictionaries
+    return conn
+```
+
+
 #### Add DB connection logic to your python file
 ```python
 def send_message(message_from, message_to, message_text):
