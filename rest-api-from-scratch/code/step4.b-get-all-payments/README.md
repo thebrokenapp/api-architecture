@@ -1,6 +1,9 @@
 
-# Implementing Fetch All Payments Endpoints
+# Implementing Fetch All Payments For a User
 
+### A question
+We have seen how `GET` requests should not be having a request body.
+So where do we provide the `user_name` information?
 
 # Code
 This code will be added as another `@app.route` in you `app.py` file.
