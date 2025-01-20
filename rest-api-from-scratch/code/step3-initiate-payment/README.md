@@ -103,6 +103,7 @@ POST /payments
 #### Sample Request Body
 ```http
 {
+    "user_name":"ankit",
     "amount": 12000,
     "payer_upi": "abx@okhdfc",
     "payee_upi": "qwe-sbi",
