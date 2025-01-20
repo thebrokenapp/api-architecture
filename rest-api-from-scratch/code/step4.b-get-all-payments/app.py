@@ -8,9 +8,13 @@ def status():
 
 payments = []
 
-@app.route('/payments')
-def getPayments():
-	return {"payments": payments}
+@app.route('/payments/<user_name>')
+def getPayments(user_name):
+	payment_list = []
+	for payment in payments:
+		if payment["user_name"] == user_name:
+			payment_list.append(payment)
+	return {"payments": payment_list}
 
 
 if __name__ == "__main__":
