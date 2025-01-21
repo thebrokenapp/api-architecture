@@ -9,7 +9,7 @@ This code will be added as another `@app.route` in you `app.py` file.
 We are adding the `GET` request to the `/payments/{transaction_id}` path.
 Note that this time, we are passing the `transaction_id` as the input to the function
 ```python
-@app.route('/payments/<transaction_id>')
+@app.route('/payments/transaction/<transaction_id>')
 def getPayment(transaction_id):
 ```
 
@@ -58,7 +58,7 @@ def initiatePayment():
 	return data								# respond back to client with request body along with newly added fields like transaction ID, timestamp, etc
 
 
-@app.route('/payments/<transaction_id>')
+@app.route('/payments/transaction/<transaction_id>')
 def getPayment(transaction_id):
 	for payment in payments:				# loop over the list 
 		if payment["transaction_id"] == transaction_id:	# check transaction_id of each item in the list
@@ -79,7 +79,7 @@ python app.py
 #### Make the API call using POSTMAN
 Make the API call to `/payments` endpoint in Postman to see if you are getting an empty response
 ```http
-GET /payments/{transaction_id}
+GET /payments/transaction/{transaction_id}
 ```
 
 
