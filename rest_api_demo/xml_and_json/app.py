@@ -4,7 +4,7 @@ import dicttoxml
 
 app = Flask(__name__)
 
-@app.route('/data', methods=['GET'])
+@app.route('/user', methods=['GET'])
 def get_data():
     data = {
         "name": "John Doe",
