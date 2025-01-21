@@ -97,3 +97,11 @@ To ensure amount range is within `0` to `100000`
 ```python
 amount: int = Field(gt=0, lt=1000000)
 ```
+
+To disallow any extra fields in the request body
+```python
+class Status(BaseModel):
+	status : str
+	class Config:
+		extra = "forbid"
+```
