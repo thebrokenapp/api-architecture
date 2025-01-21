@@ -88,8 +88,8 @@ For example: to make sure max-lenght of UPI id is 10 digit
 ```python
 class Payment(BaseModel):
     amount: int = Field(strict=True)
-    payer_upi: constr(max_length=10)  
-    payee_upi: str
+    payer_upi: str = Field(min_length=8, max_length=20)
+    payee_upi: str = Field(min_length=8, max_length=20)
     note: str = ''
 ```
 
