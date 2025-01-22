@@ -1,5 +1,10 @@
 ## Making Request to an API via Code
 
+#### Install Library
+```bash
+pip install requests
+```
+
 #### GET Request
 ```python
 import requests
