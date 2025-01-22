@@ -19,8 +19,8 @@ sqlite3 upi.db
 In the shell that opens up, enter:
 ```sql
 CREATE TABLE payments (
-    user_name TEXT,
     transaction_id TEXT,
+    user_name TEXT,
     amount TEXT NOT NULL,
     status TEXT NOT NULL,
     payer_upi TEXT NOT NULL,
