@@ -18,14 +18,14 @@ We can do that using `error handlers`
 # Custom error handler for 404
 @app.errorhandler(404)
 def not_found_error(error):
-	return jsonify({"error": "Resource Not Found!"})
+	return {"error": "Resource Not Found!"},404
 ```
 
 ```python
 # Custom error handler for 405
 @app.errorhandler(405)
 def method_not_allowed_error(error):
-	return jsonify({"error": "Method Not Allowed!"})
+	return {"error": "Method Not Allowed!"},405
 ```
 
 
