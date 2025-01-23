@@ -2,7 +2,7 @@
 ```python
 @app.route('/payments/<user_name>', methods=["GET"])
 def get_payment_for_one_user(user_name):
-	status = request.args.get('status')
+	status = request.args.get('status', 'initiated')
 	return_list = []
 	if status is not None:
 		for txn in payments_db:
