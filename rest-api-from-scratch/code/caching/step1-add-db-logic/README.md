@@ -83,7 +83,7 @@ def initiate_payment(body: PaymentBody):
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
 	cursor.execute('''INSERT INTO payments (transaction_id, user_name,amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?, ?,?, ?, ?,?)''',
-	(transaction_id, amount, status, payer_upi, payee_upi, note, timestamp))
+	(transaction_id, user_name,amount, status, payer_upi, payee_upi, note, timestamp))
 	conn.commit()
 	conn.close()
  
