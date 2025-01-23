@@ -16,7 +16,6 @@ for message in pubsub.listen():
     if message['type'] == 'message':
         # Parse the message data
         payment_data = json.loads(message['data'])
-        print(payment_data)
         # Randomly decide if it's fraud or not
         if random.choice([True, False]):
             fraud_status = "fraud"
