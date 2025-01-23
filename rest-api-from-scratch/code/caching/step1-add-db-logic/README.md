@@ -71,6 +71,7 @@ def get_db_connection():
 @validate()
 def initiate_payment(body: PaymentBody):
 	data = request.get_json()
+	user_name = data.get("user_name")
 	amount = data.get("amount")
 	payer_upi = data.get("payer_upi")
 	payee_upi = data.get("payee_upi")
