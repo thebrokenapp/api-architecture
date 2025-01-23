@@ -32,3 +32,27 @@ response = requests.post(url, data=json.dumps(request_body), headers=headers)
 print(response.status_code, response.text)
 
 ```
+
+#### PATCH request
+```python
+import requests
+
+# URL to send the PATCH request to
+url = "https://example.com/api/resource"
+
+# Data to be sent in the PATCH request (usually a partial update)
+data = {
+    "field1": "new_value",
+    "field2": "updated_value"
+}
+
+# Send the PATCH request
+response = requests.patch(url, json=data)
+
+# Check the response status and content
+if response.status_code == 200:
+    print("Update successful:", response.json())
+else:
+    print("Failed to update. Status code:", response.status_code)
+
+```
