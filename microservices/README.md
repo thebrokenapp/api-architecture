@@ -33,7 +33,7 @@ def create_user():
 	
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute('''INSERT INTO users (user_name, password, registration_date, product) VALUES (?, ?, ?,?)''',
+	cursor.execute('''INSERT INTO users (username, password, registration_date, product) VALUES (?, ?, ?,?)''',
 	(user_name, password, registration_date, product))
 	conn.commit()
 	conn.close()
