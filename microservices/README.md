@@ -39,6 +39,15 @@ def create_user():
 	conn.close()
 	return {"message": "User created"},201
 ```
+#### Request body for Creating user
+```json
+{
+    "user_name": "ankit",
+    "password": "admin",
+    "product": "upi"
+}
+```
+
 
 #### Fetch All Users
 ```python
