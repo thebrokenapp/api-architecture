@@ -148,7 +148,7 @@ GET /payments
 ## Get one transaction by JSON ID
 #### Request Type
 ```http
-GET /upi/{id}
+GET /payments/<transaction_id>
 Note id is auto generated (check from them in above response)
 ```
 #### Response
@@ -187,10 +187,10 @@ Note id is auto generated (check from them in above response)
 ## Get one transaction using URL parameter
 #### Request Type
 ```http
-  GET /upi?transactionId={transactionId}
+  GET /payments?transactionId={transactionId}
 ```
 ```http
-  GET /upi?payerUpiId={payerUpiId}
+  GET /payments?status=<status>
 ```
 #### Response
 ```javascript
@@ -227,7 +227,7 @@ Note id is auto generated (check from them in above response)
 
 ## Create UPI Transaction
 ```http
-  POST /upi
+  POST /payments
 ```
 #### Response
 ```javascript
