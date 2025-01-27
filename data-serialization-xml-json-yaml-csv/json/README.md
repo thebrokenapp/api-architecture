@@ -187,9 +187,6 @@ Note id is auto generated (check from them in above response)
 ## Get one transaction using URL parameter
 #### Request Type
 ```http
-  GET /payments?transactionId={transactionId}
-```
-```http
   GET /payments?status=<status>
 ```
 #### Response
