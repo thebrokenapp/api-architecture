@@ -286,3 +286,10 @@ sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
 ```
+
+#### Upgrade old nodejs to newer version
+```bash
+nvm install --lts
+nvm use --lts
+node -v
+```
