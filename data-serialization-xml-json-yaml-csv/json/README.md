@@ -110,7 +110,7 @@ Details of API usage: including request body (payload), request type, headers, e
 ## Get All Transactions
 #### Request Type
 ```http
-GET /upi
+GET /payments
 ```
 
 #### Response
