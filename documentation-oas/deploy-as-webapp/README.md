@@ -10,3 +10,8 @@ project/
 └── static/
     └── final-oas.yaml
 ```
+
+#### Start your WebApp
+```bash
+python app.py
+```
