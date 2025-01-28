@@ -18,6 +18,7 @@ class LoadTestUser(HttpUser):
     @task(2)  # Runs this task twice as often as get_payments
     def create_payment(self):
         response = self.client.post("/payments", json={
+            "user_name": "random_user"
             "amount": random.randint(1000, 5000),
             "note": "Books",
             "payee_upi": "qwe-sbi",
