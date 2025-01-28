@@ -18,11 +18,11 @@ class LoadTestUser(HttpUser):
     @task(2)  # Runs this task twice as often as get_payments
     def create_payment(self):
         response = self.client.post("/payments", json={
-            "user_name": "random_user"
+            "user_name": "random_user",
             "amount": random.randint(1000, 5000),
             "note": "Books",
-            "payee_upi": "qwe-sbi",
-            "payer_upi": "abx@okhdfc"
+            "payee_upi": "qqwergwe-sbi",
+            "payer_upi": "abx@okfdhrhdfc"
         })
 
         if response.status_code == 200:  # Assuming 201 is the success status
