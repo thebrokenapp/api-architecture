@@ -290,3 +290,14 @@ nvm install --lts
 nvm use --lts
 node -v
 ```
+
+
+#### Batch2
+```bash
+sudo apt install nodejs
+sudo apt install npm
+npm install n -g
+n stable
+n latest
+node -v
+```
