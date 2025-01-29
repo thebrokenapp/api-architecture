@@ -133,6 +133,7 @@ password: admin
 * Total Number of Requests
 * Rate of Requests (Traffic per second)
 * Latency
+* Response Codes Count
 ```bash
 REQUESTS: (Count Based)
 1. Total HTTP Requests:
