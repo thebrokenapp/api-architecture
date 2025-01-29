@@ -131,7 +131,7 @@ password: admin
 
 #### API Dashboards
 ```bash
-REQUESTS:
+REQUESTS: (Count Based)
 1. Total HTTP Requests:
 	sum(flask_http_request_total)
 2. Total GET Requests:
@@ -144,20 +144,20 @@ REQUESTS:
 	sum(flask_http_request_total{method="DELETE"})
 
 
-LATENCY
+LATENCY (Line Chart Based)
 * GET ALL Payments: (flask_http_request_duration_seconds_sum{path="/payments", method="GET"}/flask_http_request_duration_seconds_count{path="/payments",method="GET"})*1000
 * Make a Payment: (flask_http_request_duration_seconds_sum{path="/payments", method="POST"}/flask_http_request_duration_seconds_count{path="/payments",method="POST"})*1000
 * Delete a Payment: (sum(flask_http_request_duration_seconds_sum{method="DELETE"})/sum(flask_http_request_duration_seconds_count{method="DELETE"}))*1000
 * Update a payment: (sum(flask_http_request_duration_seconds_sum{method="PATCH"})/sum(flask_http_request_duration_seconds_count{method="PATCH"}))*1000
 
 
-TRAFFIC
+TRAFFIC (Line Chart Based)
 rate(
   flask_http_request_total[30s]
 )
 
 
-RESPONSE CODES
+RESPONSE CODES (Count Based)
 * Success: flask_http_request_total{status="200"}
 * Created: flask_http_request_total{status="201"}
 * Not Found: flask_http_request_total{status="404"}
