@@ -129,7 +129,10 @@ password: admin
 * Name the dashboard
 * Choose data source as prometheus
 
-#### API Dashboards
+#### API Monitoring
+* Total Number of Requests
+* Rate of Requests (Traffic per second)
+* Latency
 ```bash
 REQUESTS: (Count Based)
 1. Total HTTP Requests:
