@@ -3,7 +3,7 @@ groups:
 - name: Payment API Rules
   rules:
   - alert: APIDown
-    expr: up{instance="127.0.0.1:5000", job="api-monitoring"} == 0
+    expr: up{instance="127.0.0.1:5000"} == 0
     for: 0m
     labels:
       severity: critical
