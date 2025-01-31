@@ -94,3 +94,17 @@ kill -9 <pid>
 ```
 
 ### Try rebooting server and check if API is up after restart too
+
+
+### Dependencies
+```bash
+pip install flask
+pip install redis
+pip install Flask-Pydantic
+pip install pydantic
+pip install prometheus-flask-exporter
+pip install Flask-Limiter
+pip install PyJWT
+pip install Flask-HTTPAuth
+pip install gunicorn
+```
