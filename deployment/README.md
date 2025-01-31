@@ -105,6 +105,7 @@ pip install pydantic
 pip install prometheus-flask-exporter
 pip install Flask-Limiter
 pip install PyJWT
+pip install PyJWT -U
 pip install Flask-HTTPAuth
 pip install gunicorn
 ```
