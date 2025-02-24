@@ -28,6 +28,23 @@ def create_group(group_name):
         return {"txn_status": "failed", "txn_timestamp": create_date, "notes": "group already exists: " + group_name}
 
 ```
+### Simplistic implementation
+```python
+
+def create_group(group_name):
+    create_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    conn = get_db_connection()  # use the function defined above to get a connection to DB
+    cursor = conn.cursor()      # # Creates a cursor object to interact with the database.
+    # Attempt to insert the new group
+    cursor.execute('''INSERT INTO groups (group_name, create_date) VALUES (?, ?)''',(group_name, create_date))
+    conn.commit()
+    conn.close
+    return {"txn_status": "success", "txn_timestamp": create_date, "notes": "group is created with name: " + group_name}
+   
+```
+
+
+
 
 ### Register the function that you want to expose as API
 ```python
