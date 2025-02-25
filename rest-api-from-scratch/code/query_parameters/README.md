@@ -1,6 +1,6 @@
 ### Filter all transactions with `status` as `success`
 ```python
-@app.route('/payments/<user_name>', methods=["GET"])
+@app.route('/payments', methods=["GET"])
 def get_payment_for_one_user(user_name):
 	status = request.args.get('status', 'initiated')
 	amount = request.args.get('amount', 0)
