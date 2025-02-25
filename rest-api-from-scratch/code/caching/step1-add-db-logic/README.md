@@ -20,7 +20,6 @@ In the shell that opens up, enter:
 ```sql
 CREATE TABLE payments (
     transaction_id TEXT,
-    user_name TEXT,
     amount TEXT NOT NULL,
     status TEXT NOT NULL,
     payer_upi TEXT NOT NULL,
