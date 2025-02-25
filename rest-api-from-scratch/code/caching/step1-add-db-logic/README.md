@@ -70,7 +70,6 @@ def get_db_connection():
 @validate()
 def initiate_payment(body: PaymentBody):
 	data = request.get_json()
-	user_name = data.get("user_name")
 	amount = data.get("amount")
 	payer_upi = data.get("payer_upi")
 	payee_upi = data.get("payee_upi")
@@ -81,8 +80,8 @@ def initiate_payment(body: PaymentBody):
 	
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute('''INSERT INTO payments (transaction_id, user_name,amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?, ?,?, ?, ?,?)''',
-	(transaction_id, user_name,amount, status, payer_upi, payee_upi, note, timestamp))
+	cursor.execute('''INSERT INTO payments (transaction_id, amount, status, payer_upi, payee_upi, note, timestamp) VALUES (?, ?, ?, ?,?, ?, ?)''',
+	(transaction_id,amount, status, payer_upi, payee_upi, note, timestamp))
 	conn.commit()
 	conn.close()
  
