@@ -13,19 +13,18 @@ class LoadTestUser(HttpUser):
 
     @task(1)  # Weight of this task compared to others
     def get_apistatus(self):
-        self.client.get("/apiStatus")
+        self.client.get("/payments/apiStatus")
 
     @task(2)  # Runs this task twice as often as get_payments
     def create_payment(self):
         response = self.client.post("/payments", json={
-            "user_name": "random_user",
             "amount": random.randint(1000, 5000),
             "note": "Books",
             "payee_upi": "qqwergwe-sbi",
             "payer_upi": "abx@okfdhrhdfc"
         })
 
-        if response.status_code == 200:  # Assuming 201 is the success status
+        if response.status_code in [200, 201]:  # Assuming 201 is the success status
             # Extract transaction_id from the response
             transaction_id = response.json().get("transaction_id")
             if transaction_id:
@@ -43,7 +42,7 @@ class LoadTestUser(HttpUser):
             # Send DELETE request
             response = self.client.delete(f"/payments/{transaction_id}")
             
-            if response.status_code == 204:
+            if response.status_code in [200,204]:
                 print(f"Successfully deleted transaction: {transaction_id}")
                 self.transaction_ids.remove(transaction_id)  # Remove from list after successful deletion
             elif response.status_code == 404:
