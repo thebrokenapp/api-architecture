@@ -18,6 +18,12 @@ auth = HTTPBasicAuth()
 
 Add the password verification function
 ```python
+users = {
+    "ankit": "my_password",
+    "rohan": "12345",
+    "yash": "admin123"
+}
+
 @auth.verify_password
 def verify_password(username, password):
     if username in users and users.get(username)== password:
