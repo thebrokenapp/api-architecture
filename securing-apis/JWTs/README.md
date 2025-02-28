@@ -37,7 +37,7 @@ def login():
     # Generate a token
     expiration_time = datetime.datetime.utcnow() + datetime.timedelta(minutes=2)
     token = jwt.encode({'username': username, 'exp': expiration_time}, app.config['SECRET_KEY'], algorithm='HS256')
-    return jsonify({'token': token}), 200
+    return {'token': token}, 200
 ```
 
 
@@ -56,8 +56,8 @@ def token_required(f):
             username = decoded_token['username']
             return f(username)
         except jwt.ExpiredSignatureError:
-            return jsonify({"msg": "Token has expired"}), 401
+            return {"msg": "Token has expired"}, 401
         except jwt.InvalidTokenError:
-            return jsonify({"msg": "Invalid token"}), 401
+            return {"msg": "Invalid token"}, 401
     return wrapper
 ```
