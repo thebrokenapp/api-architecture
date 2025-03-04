@@ -15,7 +15,7 @@ This guide provides steps to install and configure NGINX on an Ubuntu system to 
 ```bash
 sqlite3 upi.db
 CREATE TABLE users (
-    username TEXT,
+    user_name TEXT,
     password TEXT,
     registration_date TEXT,
     product TEXT
@@ -33,7 +33,7 @@ def create_user():
 	
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute('''INSERT INTO users (username, password, registration_date, product) VALUES (?, ?, ?,?)''',
+	cursor.execute('''INSERT INTO users (user_name, password, registration_date, product) VALUES (?, ?, ?,?)''',
 	(user_name, password, registration_date, product))
 	conn.commit()
 	conn.close()
@@ -70,7 +70,7 @@ def get_all_users():
 def get_one_user(user_name):
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute('''SELECT * FROM users where username = ?''',(user_name,))
+	cursor.execute('''SELECT * FROM users where user_name = ?''',(user_name,))
 	user = cursor.fetchone()
 
 	if user is None:
@@ -88,7 +88,7 @@ def get_one_user(user_name):
 def delete_one_user(user_name):
 	conn = get_db_connection()	# use the function defined above to get a connection to DB
 	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute("""DELETE FROM users WHERE username = ?""", (user_name,))
+	cursor.execute("""DELETE FROM users WHERE user_name = ?""", (user_name,))
 	conn.commit()
 
 	if cursor.rowcount == 0:  # Check if no rows were deleted
