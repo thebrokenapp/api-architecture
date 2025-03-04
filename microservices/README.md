@@ -48,22 +48,6 @@ def create_user():
 }
 ```
 
-
-#### Fetch All Users
-```python
-@app.route('/users', methods=['GET'])
-def get_all_users():
-	conn = get_db_connection()	# use the function defined above to get a connection to DB
-	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
-	cursor.execute('''SELECT * FROM users''')
-	users = cursor.fetchall()
-	users_list = []
-	for row in users:
-		users_list.append( {"user_name": row[0], "password": row[1], "date": row[2], "product": row[3]})
-
-	return {"users": users_list},200
-```
-
 #### Fetch One User
 ```python
 @app.route('/users/<user_name>', methods=['GET'])
@@ -98,6 +82,22 @@ def delete_one_user(user_name):
 	conn.close()
 	return {}, 204
 ```
+
+#### Fetch All Users
+```python
+@app.route('/users', methods=['GET'])
+def get_all_users():
+	conn = get_db_connection()	# use the function defined above to get a connection to DB
+	cursor = conn.cursor()		# # Creates a cursor object to interact with the database.
+	cursor.execute('''SELECT * FROM users''')
+	users = cursor.fetchall()
+	users_list = []
+	for row in users:
+		users_list.append( {"user_name": row[0], "password": row[1], "date": row[2], "product": row[3]})
+
+	return {"users": users_list},200
+```
+
 
 #### Question
 ```http
