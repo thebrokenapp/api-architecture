@@ -2,6 +2,7 @@
 #### Install dependencies
 ```bash
 pip install PyJWT
+pip install --upgrade PyJWT
 ```
 
 #### Update the `generate_jwt.py` file with the expiry timestamp
